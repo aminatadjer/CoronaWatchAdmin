@@ -33,12 +33,12 @@ import "assets/scss/material-kit-react.scss?v=1.8.0";
 
 import AdminLayout from "layouts/Admin.jsx";
 import AgentLayout from "layouts/Agent.jsx";
-
+import RedacteurLayout from "layouts/Redacteur.jsx";
 ReactDOM.render(
   <BrowserRouter>
     <Switch>
+      
       <Route path="/moderateur" render={props => <AdminLayout {...props} />} />
-      <Route path="/agentsante" render={props => <AgentLayout {...props} />} />
       <Redirect from="/" to="/moderateur/dashboard" />
     </Switch>
   </BrowserRouter>,

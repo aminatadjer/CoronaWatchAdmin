@@ -5,9 +5,9 @@
   "dependencies": {
     "@material-ui/core": "^4.9.7",
     "@material-ui/icons": "^4.9.1",
-    "bootstrap": "3.3.7",
+    "bootstrap": "^4.4.1",
     "chartist": "0.10.1",
-    "node-sass": "4.12.0",
+    "node-sass": "^4.13.1",
     "react": "16.8.6",
     "react-bootstrap": "0.32.4",
     "react-chartist": "0.13.3",
@@ -16,9 +16,10 @@
     "react-notification-system": "0.2.17",
     "react-router": "5.0.0",
     "react-router-dom": "5.0.0",
-    "react-scripts": "3.0.0",
+    "react-scripts": "^3.4.1",
     "react-select": "^3.0.8",
-    "react-toggle": "4.0.2"
+    "react-toggle": "4.0.2",
+    "suneditor-react": "^2.8.0"
   },
   "devDependencies": {
     "@types/googlemaps": "3.30.19",

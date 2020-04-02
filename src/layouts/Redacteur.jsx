@@ -14,7 +14,7 @@ import routes from "routesredacteur.js";
 
 import image from "assets/img/sidebar-3.jpg";
 
-class Agent extends Component {
+class Redacteur extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -58,7 +58,7 @@ class Agent extends Component {
   };
   getRoutes = routes => {
     return routes.map((prop, key) => {
-      if (prop.layout === "/agentsante") {
+      if (prop.layout === "/redacteur") {
         return (
           <Route
             path={prop.layout + prop.path}
@@ -183,4 +183,4 @@ class Agent extends Component {
   }
 }
 
-export default Agent;
+export default Redacteur;

@@ -7,7 +7,9 @@ import CompteModerateur from "views/moderateur/compte.jsx";
 import ModerateurNotifications from "views/moderateur/notifications.jsx";
 import VeilleModerateur from "views/moderateur/veille.jsx"
 import DashboardModerateur from "views/moderateur/dashboard.jsx"
-
+import Articles from "views/moderateur/Articles.jsx";
+import Commentaire from "views/moderateur/Commentaire";  
+import Videos from "views/moderateur/Videos";  
 
 const dashboardRoutes = [
   {
@@ -18,10 +20,10 @@ const dashboardRoutes = [
     layout: "/moderateur"
   },
   {
-    path: "/Article",
-    name: "Article",
+    path: "/Articles",
+    name: "Articles",
     icon: "pe-7s-news-paper",
-    component: DashboardModerateur,
+    component: Articles,
     layout: "/moderateur"
   },
   {
@@ -47,18 +49,21 @@ const dashboardRoutes = [
     layout: "/moderateur"
   },
   
+  
+
   {
-    path: "/video",
-    name: "Vidéos Utilisateur",
-    icon: "pe-7s-video",
-    component: DashboardModerateur,
+    path: "/Vidéos",
+    name: "Vidéos utilisateur",
+    icon: "pe-7s-film",
+    component: Videos,
     layout: "/moderateur"
-  },
+  }
+  ,
   {
-    path: "/commentaires",
-    name: "Commentaires",
+    path: "/Commentaire",
+    name: "Commentaire",
     icon: "pe-7s-comment",
-    component: DashboardModerateur,
+    component: Commentaire,
     layout: "/moderateur"
   },
   {
