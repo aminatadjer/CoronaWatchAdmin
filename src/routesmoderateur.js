@@ -10,7 +10,7 @@ import DashboardModerateur from "views/moderateur/dashboard.jsx"
 import Articles from "views/moderateur/Articles.jsx";
 import Commentaire from "views/moderateur/Commentaire";  
 import Videos from "views/moderateur/Videos";  
-import Validation from "views/moderateur/Validation";  
+import Cas from "views/moderateur/Cas";  
 const dashboardRoutes = [
   {
     path: "/dashboard",
@@ -29,10 +29,10 @@ const dashboardRoutes = [
   },
   
   {
-    path: "/Validation",
-    name: "Validation",
-    icon: "pe-7s-news-paper",
-    component: Validation,
+    path: "/Cas",
+    name: "Cas suspects",
+    icon: "pe-7s-delete-user",
+    component: Cas,
     layout: "/moderateur"
   },
   

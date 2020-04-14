@@ -42,7 +42,7 @@ import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import KeyboardVoiceIcon from '@material-ui/icons/KeyboardVoice';
 import Icon from '@material-ui/core/Icon';
 import SaveIcon from '@material-ui/icons/Save';
-class Validation extends Component {
+class Cas extends Component {
   render() {
     return (
       <div className="content">
@@ -126,7 +126,7 @@ class Validation extends Component {
     
   </tr>
                     <tr>
-    <th> Utilisateur: Lydia Benaida</th>
+    <th> Utilisateur: Ahmed bouaali</th>
     
   </tr>
  
@@ -134,8 +134,7 @@ class Validation extends Component {
    
     <td> 
       <p align ="right">
-                            
-      <img style={{  float :'left'  }} src="https://static.arabic.cnn.com/sites/default/files/styles/sw_780/public/2020/02/06/images/001.jpg?itok=i1LbXipw" alt="Smiley face"  width="400" height="200" />
+      <iframe style={{  float :'left'  }}  width="400" height="200  " src="https://www.youtube.com/embed/ZwFfWCM6pgE" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
       تشير الدراسات التي أُجريت حتى يومنا هذا إلى أن الفيروس الذي يسبب مرض كوفيد-19 ينتقل في المقام الأول عن طريق ملامسة القُطيرات التنفسية لا عن طريق الهواء. انظر الإجابة عن السؤال السابق: "كيف ينتشر مرض كوفيد-19؟
     </p>                        
                            
@@ -181,4 +180,4 @@ class Validation extends Component {
   }
 }
 
-export default Validation;
+export default Cas;
