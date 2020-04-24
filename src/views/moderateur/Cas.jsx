@@ -61,44 +61,27 @@ class Cas extends Component {
     casSignaler:[],
   };
 
- saveScore() {
-    
-      axios.get('http://127.0.0.1:8000/api/casSignaler',
-      {
-          valide: 'true',
-          
-      }).then(res=>{
-        console.log(res)
-      })
-     
-        
-    
-  };
-  refreshList = () => {
-    axios
-      .get("http://localhost:8000/api/casSignaler/")
-      .then(res => this.setState({ todoList: res.data }))
-      .catch(err => console.log(err));
-  };
-
-
-  update (id) {
-      axios
-        .put(`http://localhost:8000/api/casSignaler/detail/${id}`,
-        {
-            valide: 'true',
-            
-        })
-        .then(res => this.refreshList())
-        .catch(err => console.log(err));
-      return;
-  };
-putDate(id){
+ 
+validateClick(id){
   console.log(id)
-  const token="9640cba75d06a5ed3d444afda0c8d8924d839a2a"
-  axios.put(`http://127.0.0.1:8000/api/casSignaler/${id}`,{
-    "valide":true,
-  },{headers:{"Authorication":`Token ${token}`}}).then(res=>{
+  axios.put(`http://127.0.0.1:8000/api/casSignaler/valider/${id}`,{
+    "valide":1,
+    "vu":1,
+  }).then(res=>{
+    
+    console.log(res)
+  })
+ 
+  
+;
+  
+}
+deleteClick(id){
+  console.log(id)
+  axios.put(`http://127.0.0.1:8000/api/casSignaler/supprimer/${id}`,{
+    "supprime":1,
+    "vu":1,
+  }).then(res=>{
     
     console.log(res)
   })
@@ -109,16 +92,10 @@ putDate(id){
 }
   componentDidMount(){
 
-    axios.get(' http://127.0.0.1:8000/api/casSignaler/',{
-      params: {
-        where:[["valide","=",false]]
-      }
-    }
+    axios.get(' http://127.0.0.1:8000/api/casSignaler/'
     ).then(res =>{
         console.log(res);
-        if (res.data.id=1) {
-          console.log(res)
-        }
+       
         this.setState({casSignaler:res.data});
       }
   
@@ -134,7 +111,7 @@ putDate(id){
       {
     
       this.state.casSignaler.map(casSignaler => {
-   if (casSignaler.valide==0){
+   if (casSignaler.vu==0){
         return  <div className="content">
         <Grid fluid>
           <Row>
@@ -174,8 +151,8 @@ putDate(id){
   
   <FileViewer
          
-        filePath={casSignaler.video}
-        fileType={fileExtension(casSignaler.video )  }
+        filePath={casSignaler.media}
+        fileType={fileExtension(casSignaler.media )  }
       
        
       />
@@ -188,7 +165,8 @@ putDate(id){
     <th>
     
     <Button
-     
+    onClick={() => this.deleteClick(casSignaler.id)}
+ 
         variant="contained"
         color="secondary"
         style={{ background:'#FF4A55', color: 'black' ,position:'relative', left:'535px', top:'2px',width:'200PX',fontSize:'15px'}}
@@ -197,7 +175,8 @@ putDate(id){
        <strong>  Supprimer</strong>
       </Button>
       <Button
-          onClick={this.update(casSignaler.id)}
+        onClick={() => this.validateClick(casSignaler.id)}
+
           style={{ background:'#87CB16', color: 'black' ,position:'relative', left:'120px', top:'2px',width:'200PX',fontSize:'15px'}}
         variant="contained"
         color="Green"
