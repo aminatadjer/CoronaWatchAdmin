@@ -21,6 +21,7 @@ import  axios from "axios";
 class AdminNavbarLinks extends Component {
   state ={
     casSignaler:[],
+    notif:[]
   };
   componentDidMount(){
 
@@ -40,23 +41,44 @@ class AdminNavbarLinks extends Component {
       );
     
   }
+
   render() {
+  
+
+    var   notif=0;
    
+    this.state.casSignaler.map(casSignaler=>{
+     
+      if(casSignaler.vu==1){
+       
+        this.notif=+1;
+        console.log(this.notif)
+      }
+    
+    }
+
+      )
+    
+
+
     const notification = (
       <div>
+      
         <i className="fa fa-globe" />
         <b className="caret" />
-        <span className="notification"> {this.state.casSignaler.length}</span>
+        <span className="notification"> {this.notif}</span>
         <p className="hidden-lg hidden-md">Notification</p>
       </div>
     );
     return (
+
+    
+    
+   
+  
       <ul>
-        {
-      
-        this.state.casSignaler.map(casSignaler => {
-     if (casSignaler.valide==0){
-          return  <div className="content">
+        
+       <div className="content">
         <Nav>
          
           <NavDropdown
@@ -65,11 +87,8 @@ class AdminNavbarLinks extends Component {
             noCaret
             id="basic-nav-dropdown"
           >
-            <MenuItem eventKey={2.1}>Notification 1</MenuItem>
-            <MenuItem eventKey={2.2}>Notification 2</MenuItem>
-            <MenuItem eventKey={2.3}>Notification 3</MenuItem>
-            <MenuItem eventKey={2.4}>Notification 4</MenuItem>
-            <MenuItem eventKey={2.5}>autres notifications</MenuItem>
+            <MenuItem eventKey={2.1}>vous avez  notifications non vues</MenuItem>
+           
           </NavDropdown>
          
         </Nav>
@@ -82,8 +101,8 @@ class AdminNavbarLinks extends Component {
            Déconnexion
           </NavItem>
         </Nav>
-        </div>}
-      })}
+        </div>
+      
     
     </ul>)
   }

@@ -68,7 +68,7 @@ validateClick(id){
     "valide":1,
     "vu":1,
   }).then(res=>{
-    
+    this.componentDidMount();
     console.log(res)
   })
  
@@ -82,7 +82,7 @@ deleteClick(id){
     "supprime":1,
     "vu":1,
   }).then(res=>{
-    
+    this.componentDidMount();
     console.log(res)
   })
  
