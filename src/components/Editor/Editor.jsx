@@ -6,10 +6,25 @@ import 'suneditor/dist/css/suneditor.min.css'
 import suneditor from 'suneditor'
 import plugins from 'suneditor/src/plugins'
 import SunEditor,{buttonList} from "suneditor-react";
+
 export class Editor extends Component {
+ 
+
+  handleChange(content){
+    
+    console.log(content); //Get Content Inside Editor
+
+  }
+ 
+
   render() {
+    
     return (
-        <SunEditor setOptions={{
+        <SunEditor 
+        onChange={this.handleChange}
+      
+     
+        setOptions={{
             height: 400,
             buttonList: [
     [ 'video', 'image', 'list'],['undo', 'redo'],

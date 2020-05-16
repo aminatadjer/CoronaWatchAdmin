@@ -30,12 +30,85 @@ import KeyboardVoiceIcon from '@material-ui/icons/KeyboardVoice';
 import Icon from '@material-ui/core/Icon';
 import SaveIcon from '@material-ui/icons/Save';
 
+import FileViewer from 'react-file-viewer';  
+import {FormInputs} from 'components/FormInputs/FormInputs.jsx'
+import  axios from "axios";
 
 
+var fileExtension = require('file-extension');
 class TableList extends Component {
+  state ={
+    articles:[],
+  };
+ 
+  validateClick(id){
+    console.log(id)
+    axios.put(`http://127.0.0.1:8000/api/article/ ${id} /ArticleValider/`,{
+      "valide":1,
+      "vu":1,
+    }).then(res=>{
+      this.componentDidMount();
+      console.log(res)
+    })
+   
+    
+  ;
+    
+  }
+  
+  deleteClick(id){
+    console.log(id)
+    axios.put(`http://127.0.0.1:8000/api/article/ ${id} /ArticleSupprimer/ `,{
+      "supprime":1,
+      "vu":1,
+    }).then(res=>{
+      this.componentDidMount();
+      console.log(res)
+    })
+   
+    
+  ;
+    
+  }
+  componentDidMount(){
+
+    axios.get(' http://127.0.0.1:8000/api/article/'
+    ).then(res =>{
+        console.log(res);
+       
+        this.setState({articles:res.data});
+      }
+  
+      );
+    
+  }
+  List(file_extention,media) {
+    if (file_extention=="png" || file_extention=="jpg" ) {
+      return <img src={media} style={{ height :'500PX',width:'600px',  textAlign:' center',justifyContent: 'center', alignItems: 'center',position:' relative'}} ></img>
+
+      ;
+    }else{
+      if(file_extention=="mp4"){
+        return    <FileViewer 
+        fileType={"mp4"}
+        filePath={media}></FileViewer>
+      }
+    }
+   
+    
+  }
+ 
   render() {
+  
+  
     return (
-      <div className="content">
+      <ul>
+      {
+    
+      this.state.articles.map(articles => {
+      
+   if (articles.valide==0){
+        return  <div className="content">
         <Grid fluid>
           <Row>
             <Col md={12}>
@@ -47,72 +120,105 @@ class TableList extends Component {
                 content={
                   <Table striped >
                     
-                    <tbody>
+                  <tbody>
+                  <tr>
+                    <th>
+                    <FormInputs
+    ncols = {["col-md-5"  , "col-md-3"]}
+    properties = {[
+        {
+          label : "Redacteur",
+            type : "text",
+            bsClass : "form-control",
+            placeholder : "Company",
+            defaultValue :articles.contenu,
+            disabled : true
+        },
+        {
+          label : "Titre",
+            type : "text",
+            bsClass : "form-control",
+            placeholder : "Company",
+            defaultValue :articles.titre,
+            disabled : true
+        }
+    ]}
+/>
+                    </th>
+                    </tr>
                     <tr>
-    <th> Rédacteur: Lydia Benaida</th>
-    
-  </tr>
-  <tr>
-    <th>Article: 01</th>
-    
-  </tr>
-  <tr>
-   
-    <td> 
-    <h3 align ="center" style={{ color: 'red' }}>فيروس كورونا</h3>
-      <p align ="right">
+                     <p
+                     align ="right"        style={{ fontSize:'25px'}}
+                      
+                       dangerouslySetInnerHTML={{
+                         __html:articles.contenu
+                       }}
+                      
+                      >
                             
-                            أكد وزير الشؤون الدينية والأوقاف في الجزائر، يوسف بلمهدي، اليوم الثلاثاء، أن لجنة الفتوى قررت تعليق صلاة الجمعة والجماعة، وغلق المساجد في جميع أنحاء البلاد للحد من انتشار فيروس كورونا.
-    
-    وسجّلت الجزائر إصابات جديدة بفيروس كورونا، ليصل إجمالي عدد المصابين في البلاد إلى 60 حالة، بينها أربع وفيات، بحسب وكالة الأنباء الرسمية.
-    
-    وقد أعلنت السلطات الجزائرية وقف حركة النقل الجوي والبحري مع أوروبا ابتداء من 19 مارس/آذار الجاري.
-    
-    وفي الكويت، أعلنت السلطات اليوم الثلاثاء تسجيل سبع إصابات جديدة بالفيروس، ليرتفع عدد المصابين المسجلين في البلاد إلى 130 حالة.
-    
-    وأعلن وزير الصحة الكويتي عبد الله السند، في مؤتمر صحفي صباح اليوم أن الحالات الجديدة المسجلة مرتبطة بالسفر إلى بريطانيا، وجميعها لمواطنين كويتيين 
-    
-    </p>                        
-                            <img src="https://images.livemint.com/img/2020/01/28/600x338/2020-01-28T063735Z_1_LYNXMPEG0R0E0_RTROPTP_3_CHINA-HEALTH_1580199850816_1580199867161.JPG" alt="Smiley face"  width="400" height="200" /></td>
-  </tr>
-  <tr>
-    <th>
-    
-              
-    <Button
-        variant="contained"
-        color="secondary"
-        style={{ background:'#FF4A55', color: 'black' ,position:'relative', left:'500px', top:'2px',width:'200PX',fontSize:'15px'}}
-        startIcon={<DeleteIcon />}
-      >
-       <strong>  Supprimer</strong>
-      </Button>
-      <Button
-          style={{ background:'#87CB16', color: 'black' ,position:'relative', left:'80px', top:'2px',width:'200PX',fontSize:'15px'}}
-        variant="contained"
-        color="Green"
-       
-        startIcon={<CheckCircleIcon />}
-      >
-    <strong>    Valider</strong>
-      </Button>
-            
-            
-    </th>
-    
-  </tr>
-                    </tbody>
-                  </Table>
-                }
-              />
-              
-            </Col>
+                    </p>
+  
+                 </tr>
+                  
 
-            
-          </Row>
-        </Grid>
-      </div>
-    );
+                <tr>
+ 
+                <td> 
+               
+    <p align ="center" >
+    {this.List(fileExtension(articles.media),articles.media) }
+  
+
+  </p>
+  
+                   
+
+                          </td>
+</tr>
+<tr>
+  <th>
+  
+  <Button
+ onClick={() => this.deleteClick(articles.id)}
+
+      variant="contained"
+      color="secondary"
+      style={{ background:'#FF4A55', color: 'black' ,position:'relative', left:'535px', top:'2px',width:'200PX',fontSize:'15px'}}
+      startIcon={<DeleteIcon />}
+    >
+     <strong>  Supprimer</strong>
+    </Button>
+    <Button
+     onClick={() => this.validateClick(articles.id)}
+
+        style={{ background:'#87CB16', color: 'black' ,position:'relative', left:'120px', top:'2px',width:'200PX',fontSize:'15px'}}
+      variant="contained"
+      color="Green"
+     
+      startIcon={<CheckCircleIcon />}
+    >
+  <strong>    Valider</strong>
+    </Button>
+          
+          
+          
+  </th>
+  
+</tr>
+                  </tbody>
+                </Table>
+                 
+                }
+                />
+              </Col>
+             
+            </Row>
+          </Grid>
+        </div>}
+        })}
+      
+      </ul>
+    )
   }
 }
 

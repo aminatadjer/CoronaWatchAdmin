@@ -51,7 +51,7 @@ import FileViewer from 'react-file-viewer';
 
 var fileExtension = require('file-extension');
 
-;
+
  
 
 
@@ -59,12 +59,13 @@ class Cas extends Component {
 
   state ={
     casSignaler:[],
+    articles:[]
   };
 
  
 validateClick(id){
   console.log(id)
-  axios.put(`http://127.0.0.1:8000/api/casSignaler/valider/${id}`,{
+  axios.put(`http://127.0.0.1:8000/api/casSignaler/${id}/CasSignalerValider/`,{
     "valide":1,
     "vu":1,
   }).then(res=>{
@@ -76,9 +77,10 @@ validateClick(id){
 ;
   
 }
+
 deleteClick(id){
   console.log(id)
-  axios.put(`http://127.0.0.1:8000/api/casSignaler/supprimer/${id}`,{
+  axios.put(`http://127.0.0.1:8000/api/casSignaler/${id}/CasSignalerSupprimer/`,{
     "supprime":1,
     "vu":1,
   }).then(res=>{
@@ -89,6 +91,12 @@ deleteClick(id){
   
 ;
   
+}
+ List(file_extention) {
+  console.log(file_extention)
+  if (file_extention==".mp4" ){
+    console.log("Sorry, the list is empty")
+  }
 }
   componentDidMount(){
 
@@ -102,6 +110,23 @@ deleteClick(id){
       );
     
   }
+  List(file_extention,media) {
+    if (file_extention=="png" || file_extention=="jpg" ) {
+      return <img src={media} style={{ height :'500PX',width:'700px',  textAlign:' center',justifyContent: 'center', alignItems: 'center',position:' relative'}} ></img>
+
+      ;
+    }else{
+      if(file_extention=="mp4"){
+        return    <FileViewer 
+        fileType={"mp4"}
+        filePath={media}></FileViewer>
+      }
+    }
+   
+    
+  }
+ 
+ 
   render() {
   
  
@@ -132,13 +157,13 @@ deleteClick(id){
                     <tbody>
                     <tr>
                        <th>
-                              {casSignaler.id}
+                        Numéro du cas:      {casSignaler.id}
                       </th>
     
                    </tr>
                     <tr>
                        <th> 
-                       {casSignaler.date}
+                       la date : {casSignaler.date}
                        </th>
     
                     </tr>
@@ -146,16 +171,15 @@ deleteClick(id){
                   <tr>
    
                   <td> 
-      <p align ="right" >
- {casSignaler.commentaire} 
-  
-  <FileViewer
-         
-        filePath={casSignaler.media}
-        fileType={fileExtension(casSignaler.media )  }
+      <p align ="right"        style={{ fontSize:'25px'}} >
       
-       
-      />
+          {casSignaler.commentaire} 
+  
+
+
+      
+          
+          {this.List(fileExtension(casSignaler.media),casSignaler.media) }
     </p>
                      
   
