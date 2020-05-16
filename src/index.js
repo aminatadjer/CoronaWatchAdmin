@@ -16,7 +16,7 @@ import "assets/scss/material-kit-react.scss?v=1.8.0";
 import LandingPage from "views/LandingPage/LandingPage.js"
 import LoginPage from "views/LoginPage/LoginPage.jsx"
 import LoginPagejs from "views/LoginPage/LoginPage.js"
-
+import Register from "views/LoginPage/register.jsx"
 import AdminLayout from "layouts/Admin.jsx";
 import AgentLayout from "layouts/Agent.jsx";
 import RedacteurLayout from "layouts/Redacteur.jsx";
@@ -33,6 +33,7 @@ ReactDOM.render(
       <Route path="/moderateur" render={props =>(localStorage.getItem("role")==="moderator" ? <AdminLayout {...props} />: <Redirect to='/login'/>)} />
       <Route path="/index" render={props =>  <LandingPage {...props} /> } />
       <Route path="/login" render={props => <LoginPage {...props} />} />
+      <Route path="/register" render={props => <Register {...props} />} />
       <Route path="/loginjs" render={props => <LoginPagejs {...props} />} />
       <Route path="/redacteur" render={props =>(localStorage.getItem("role")==="editor" ? <RedacteurLayout {...props} /> : <Redirect to='/login'/>)} />
       <Route path="/agentsante" render={props =>(localStorage.getItem("role")==="health agent" ? <AgentLayout {...props} /> : <Redirect to='/login'/>)} />
