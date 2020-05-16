@@ -21,8 +21,6 @@ export class Editor extends Component {
     return (
         <SunEditor 
         onChange={this.handleChange}
-      
-     
         setOptions={{
             height: 400,
             buttonList: [
