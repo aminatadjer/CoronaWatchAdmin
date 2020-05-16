@@ -1,0 +1,62 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matches snapshot 1`] = `
+<div
+  className="checkbox"
+  data-testid="customchck"
+>
+  <input
+    checked={true}
+    onChange={[Function]}
+    type="checkbox"
+  />
+  <label />
+</div>
+`;
+
+exports[`matches snapshot 2`] = `
+<div
+  className="checkbox"
+  data-testid="customchck"
+>
+  <input
+    checked={false}
+    onChange={[Function]}
+    type="checkbox"
+  />
+  <label>
+    This is a checkbox
+  </label>
+</div>
+`;
+
+exports[`matches snapshot 3`] = `
+<div
+  className="checkbox"
+  data-testid="customchck"
+>
+  <input
+    checked={false}
+    id={1}
+    onChange={[Function]}
+    type="checkbox"
+  />
+  <label
+    htmlFor={1}
+  />
+</div>
+`;
+
+exports[`matches snapshot 4`] = `
+<div
+  className="checkbox checkbox-inline"
+  data-testid="customchck"
+>
+  <input
+    checked={false}
+    onChange={[Function]}
+    type="checkbox"
+  />
+  <label />
+</div>
+`;
