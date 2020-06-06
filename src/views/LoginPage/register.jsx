@@ -1,9 +1,6 @@
 import React, { Component } from "react";
-// @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
-import InputAdornment from "@material-ui/core/InputAdornment";
-import Icon from "@material-ui/core/Icon";
-// @material-ui/icons
+
 import Email from "@material-ui/icons/Email";
 import People from "@material-ui/icons/People";
 import Header from "components/landinglogin/Header/Header.js";
@@ -18,25 +15,15 @@ import GridContainer from "components/landinglogin/Grid/GridContainer.js";
 import GridItem from "components/landinglogin/Grid/GridItem.js";
 import image from "assets/img/bg7.jpg";
 import axiosInstance from '../../services/axiosApi.jsx'
-import jwt_decode from 'jwt-decode';
-
 import Footer from "components/landinglogin/Footer/Footer.js";
+
 const useStyles = makeStyles(styles);
 export default class Register extends Component {
-  constructor(props){
-    super(props);
-
-    this.state={
-      username: '',
-      password: '',
-      role:'',
+ 
+    state={
       user : {}
     };
-    this.change= this.change.bind(this);
-    this.submit =this.submit.bind(this);
-
-  }
-   
+ 
   
   change(e){
     this.setState({
@@ -62,6 +49,7 @@ export default class Register extends Component {
       username: this.state.username,
       password:this.state.password,
       role: this.state.role
+      
     }
     ).then(res => (
    
@@ -72,61 +60,57 @@ export default class Register extends Component {
       console.log(error);
     });
   }
-    render() {
+render() {
         return (
           <div>
-             <Header
-        absolute
-        color="transparent"
-        brand="CORONA WATCH project"
-        rightLinks={<HeaderLinks />}
-      />
-       <div
-        style={{
-          backgroundImage: "url(" + image + ")",
-          backgroundSize: "cover",
-          backgroundPosition: "top center"
-        }}
-      >
-      <br/><br/><br/>
+              <Header
+                absolute
+                color="transparent"
+                brand="CORONA WATCH project"
+                rightLinks={<HeaderLinks />}
+              />
+              <div
+                style={{
+                  backgroundImage: "url(" + image + ")",
+                  backgroundSize: "cover",
+                  backgroundPosition: "top center"
+                }}
+              >
+              <br/><br/><br/>
 
-<div>
+          <div>
           <GridContainer justify="center">
-            <GridItem xs={12} sm={12} md={4}>
-          <Card>
-            <CardHeader color="danger" align="center">
-            <h3>Connexion</h3>
-            </CardHeader>
-          
-          
-          <form onSubmit={e=>this.submit(e)}>
-          <CardBody>
+              <GridItem xs={12} sm={12} md={4}>
+                <Card>
 
-          <div className="form-group">
-              <label>Nom d'utilisateur</label>
-              <input type="text" className="form-control" placeholder="Nom d'utilisateur" name='username' onChange={e =>this.change(e)} value={this.state.username}/>
-          </div>
+                    <CardHeader color="danger" align="center">
+                       <h3>Connexion</h3>
+                    </CardHeader>
+                  <form onSubmit={e=>this.submit(e)}>
+                    <CardBody>
+                      <div className="form-group">
+                          <label>Nom d'utilisateur</label>
+                          <input type="text" className="form-control" placeholder="Nom d'utilisateur" name='username' onChange={e =>this.change(e)} value={this.state.username}/>
+                      </div>
 
-          <div className="form-group">
-              <label>Mot de passe</label>
-              <input type="password" className="form-control" placeholder="Mot de passe" name='password' onChange={e =>this.change(e)} value={this.state.password} />
-          </div>
-          <div className="form-group">
-              <label>role</label>
-              <p>moderator editor health agent</p>
-              <input type="text" className="form-control" placeholder="role" name='role' onChange={e =>this.change(e)} value={this.state.role} />
-          </div>
-          </CardBody>
-         
-                 <CardFooter align="center">
-                <Button type="submit" simple color="danger" size="lg">Connexion</Button>
-                
-                </CardFooter>
-                
-            </form>
-            </Card> 
-            </GridItem>
-            </GridContainer>
+                      <div className="form-group">
+                          <label>Mot de passe</label>
+                          <input type="password" className="form-control" placeholder="Mot de passe" name='password' onChange={e =>this.change(e)} value={this.state.password} />
+                      </div>
+                      <div className="form-group">
+                          <label>role</label>
+                          <p>moderator editor health agent</p>
+                          <input type="text" className="form-control" placeholder="role" name='role' onChange={e =>this.change(e)} value={this.state.role} />
+                      </div>
+                    </CardBody>
+                    <CardFooter align="center">
+                      <Button type="submit" simple color="danger" size="lg">Connexion</Button>  
+                    </CardFooter> 
+                  </form>
+                </Card> 
+
+              </GridItem>
+          </GridContainer>
             </div>
             <Footer whiteFont /> 
             </div>

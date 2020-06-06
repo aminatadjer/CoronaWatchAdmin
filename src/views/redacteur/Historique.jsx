@@ -2,22 +2,13 @@ import React, { Component } from "react";
 import { Grid, Row, Col, Table } from "react-bootstrap";
 
 import Card from "components/Card/Card.jsx";
-import { thArray, tdArray } from "variables/Variables.jsx";
-import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
+
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import Button from '@material-ui/core/Button';
-import { makeStyles } from '@material-ui/core/styles';
-import DeleteIcon from '@material-ui/icons/Delete';
-import EditIcon from '@material-ui/icons/Edit';
-import CloudUploadIcon from '@material-ui/icons/CloudUpload';
-import KeyboardVoiceIcon from '@material-ui/icons/KeyboardVoice';
-import Icon from '@material-ui/core/Icon';
-import SaveIcon from '@material-ui/icons/Save';
-import IconButton from '@material-ui/core/IconButton';
+
 import FileViewer from 'react-file-viewer';  
-import {FormInputs} from 'components/FormInputs/FormInputs.jsx'
 import  axios from "axios";
-import { CardFooter } from "reactstrap";
+import CancelIcon from '@material-ui/icons/Cancel';
 
 
 var fileExtension = require('file-extension');
@@ -117,19 +108,29 @@ class TableList extends Component {
                     </p>
                     <hr/>
                     <p align ="center" >
-    {this.List(fileExtension(articles.media),articles.media) }
-  </p>
-  <div align="center">
-  <IconButton onClick={() => this.deleteClick(articles.id)}
-                              style={{ background:'#e6e6e6', color: '#22A7F0' }}
-                          aria-label="edit">
-          <EditIcon fontSize="large" />
-        </IconButton> <IconButton 
-                              style={{ background:'#e6e6e6', color: '#ff0000' }}
-                          aria-label="delete">
-          <DeleteIcon fontSize="large" />
-        </IconButton>
-        </div>
+                    {this.List(fileExtension(articles.media),articles.media) }
+                  </p>
+                  <div align="center">
+                  <Button
+                                  onClick={() => this.validateClick(articles.id)}
+                                  style={{ background:'#87CB16', color: 'black' ,position:'relative', float:'center',width:'20%',fontSize:'15px'}}
+                                  variant="contained"
+                                  color="Green"
+                                  startIcon={<CheckCircleIcon />}
+                                >
+                                  <strong>Valider</strong>
+                                </Button>
+                                <Button
+                                  onClick={() => this.deleteClick(articles.id)}
+                                  variant="contained"
+                                  color="secondary"
+                                  style={{ background:'#FF4A55', color: 'black' ,position:'relative', float:'center',width:'20%',fontSize:'15px'}}
+                                  startIcon={<CancelIcon />}
+                                >
+                                   <strong>  Supprimer</strong>
+                                </Button>
+               
+                        </div>
 
 
                   </div>

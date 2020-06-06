@@ -19,7 +19,8 @@ class Redaction extends Component {
     contenu:"",
     media:null,
     titre:"",
-    article:[]
+    article:[],
+    articles:[],
   }
 
   handleChange = (e) => {
@@ -30,11 +31,11 @@ class Redaction extends Component {
     })
   };
   Change = (e) => {
-console.log("helo")
+  console.log("helo")
     console.log(this.state.titre)
  
     this.setState({
-      titre: "hi"
+      titre: e
     })
   };
 
@@ -59,6 +60,7 @@ console.log("helo")
     })
         .then(res => {
           console.log(res.data);
+          this.componentDidMount();
         })
         .catch(err => console.log(err))
   };
@@ -69,7 +71,18 @@ console.log("helo")
     }
   }
 
+  componentDidMount(){
+
+    axios.get(' http://localhost:8000/api/article/'
+    ).then(res =>{
+        console.log(res);
+ 
+        this.setState({article:res.data});
+      }
   
+      );
+   
+  }
   render() {
 
     return (

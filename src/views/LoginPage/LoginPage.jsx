@@ -23,18 +23,12 @@ import jwt_decode from 'jwt-decode';
 import Footer from "components/landinglogin/Footer/Footer.js";
 const useStyles = makeStyles(styles);
 export default class Login extends Component {
-  constructor(props){
-    super(props);
-
-    this.state={
+ 
+    state={
       username: '',
       password: '',
       user : {}
     };
-    this.change= this.change.bind(this);
-    this.submit =this.submit.bind(this);
-
-  }
    
   
   change(e){
@@ -66,6 +60,9 @@ export default class Login extends Component {
     localStorage.setItem("refresh-token",res.data.refresh),
     this.user=jwt_decode(res.data.access),
     localStorage.setItem("role",this.user['role']),
+    localStorage.setItem("id",this.user['userId']),
+    localStorage.setItem("mail",this.user['email']),
+    localStorage.setItem("username",this.user['username']),
     console.log(this.user),
     this.navigateDependingOnRole(this.user)
     )
@@ -91,7 +88,7 @@ export default class Login extends Component {
       >
       <br/><br/><br/>
 
-<div>
+      <div>
           <GridContainer justify="center">
             <GridItem xs={12} sm={12} md={4}>
           <Card>
