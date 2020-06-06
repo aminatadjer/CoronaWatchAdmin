@@ -11,7 +11,7 @@ import Button from '@material-ui/core/Button';
 import  axios from "axios";
 import SunEditor,{buttonList} from "suneditor-react";
 import Editor from "components/Editor/Editor";
-
+import {apiConfig} from "../ApiConfig.js";
 var fileExtension = require('file-extension');
 class Redaction extends Component {
 
@@ -52,8 +52,8 @@ class Redaction extends Component {
     form_data.append('media', this.state.media);
     form_data.append('contenu', this.state.contenu);
     form_data.append('titre', this.state.titre);
-    let url = 'http://127.0.0.1:8000/api/article/ ';
-    axios.post(url, form_data, {
+   
+    axios.post(apiConfig.articleUrl, form_data, {
       headers: {
         'content-type': 'multipart/form-data'
       }
@@ -73,7 +73,7 @@ class Redaction extends Component {
 
   componentDidMount(){
 
-    axios.get(' http://localhost:8000/api/article/'
+    axios.get(apiConfig.articleUrl
     ).then(res =>{
         console.log(res);
  

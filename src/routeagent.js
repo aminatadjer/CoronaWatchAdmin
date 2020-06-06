@@ -22,7 +22,7 @@ const dashboardRoutesagent = [
  
   {
     path: "/zonerisque",
-    name: "MAJ des Zone à risques",
+    name: "MAJ des Centres",
     icon: "pe-7s-map-marker",
     component: Gererzonesrisque,
     layout: "/agentsante"

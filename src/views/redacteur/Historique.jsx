@@ -9,7 +9,7 @@ import Button from '@material-ui/core/Button';
 import FileViewer from 'react-file-viewer';  
 import  axios from "axios";
 import CancelIcon from '@material-ui/icons/Cancel';
-
+import {apiConfig} from "../ApiConfig.js";
 
 var fileExtension = require('file-extension');
 class TableList extends Component {
@@ -19,7 +19,7 @@ class TableList extends Component {
  
   validateClick(id){
     console.log(id)
-    axios.put(`http://127.0.0.1:8000/api/article/${id}/ArticleValider/`,{
+    axios.put(apiConfig.articleUrl+`${id}/ArticleValider/`,{
       "valide":1,
       "vu":1,
     }).then(res=>{
@@ -34,7 +34,7 @@ class TableList extends Component {
   
   deleteClick(id){
     console.log(id)
-    axios.put(`http://127.0.0.1:8000/api/article/${id}/ArticleSupprimer/`,{
+    axios.put(apiConfig.articleUrl+`${id}/ArticleSupprimer/`,{
       "supprime":1,
       "vu":1,
     }).then(res=>{
@@ -48,7 +48,7 @@ class TableList extends Component {
   }
   componentDidMount(){
 
-    axios.get('http://127.0.0.1:8000/api/article/'
+    axios.get(apiConfig.articleUrl
     ).then(res =>{
         console.log(res);
        

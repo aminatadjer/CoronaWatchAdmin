@@ -6,10 +6,13 @@ import {
   Col
 } from "react-bootstrap";
 import { Card } from "components/Card/Card.jsx";
+import {apiConfig} from "../ApiConfig.js";
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import Button from '@material-ui/core/Button';
 import CancelIcon from '@material-ui/icons/Cancel';
 import FileViewer from 'react-file-viewer';  
+
+
 
 var fileExtension = require('file-extension');
 
@@ -21,7 +24,7 @@ class Cas extends Component {
   };
   componentDidMount(){
 
-    axios.get(' http://127.0.0.1:8000/api/casSignaler/'
+    axios.get(apiConfig.CasUrl
     ).then(res =>{
         console.log(res);
         this.setState({casSignaler:res.data});
@@ -30,7 +33,7 @@ class Cas extends Component {
  
   validateClick(id){
     
-    axios.put(`http://127.0.0.1:8000/api/casSignaler/${id}/CasSignalerValider/`,{
+    axios.put(apiConfig.CasUrl +`${id}/CasSignalerValider/`,{
       "valide":1,
       "vu":1,
     }).then(res=>{
@@ -42,7 +45,7 @@ class Cas extends Component {
 
   deleteClick(id){
  
-    axios.put(`http://127.0.0.1:8000/api/casSignaler/${id}/CasSignalerSupprimer/`,{
+    axios.put(apiConfig.CasUrl+`${id}/CasSignalerSupprimer/`,{
       "supprime":1,
       "vu":1,
     }).then(res=>{

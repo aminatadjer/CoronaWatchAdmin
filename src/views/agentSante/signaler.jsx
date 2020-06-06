@@ -1,4 +1,20 @@
+/*!
 
+=========================================================
+* Light Bootstrap Dashboard React - v1.3.0
+=========================================================
+
+* Product Page: https://www.creative-tim.com/product/light-bootstrap-dashboard-react
+* Copyright 2019 Creative Tim (https://www.creative-tim.com)
+* Licensed under MIT (https://github.com/creativetimofficial/light-bootstrap-dashboard-react/blob/master/LICENSE.md)
+
+* Coded by Creative Tim
+
+=========================================================
+
+* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+*/
 import React, { Component } from "react";
 import {
   Grid,
@@ -6,42 +22,29 @@ import {
   Col,
   Table
 } from "react-bootstrap";
+import {selectoptions} from "variables/Variables.jsx"
 import { Card } from "components/Card/Card.jsx";
+import { thArray, tdArray,thArraysv, tdArraysv } from "variables/Variables.jsx";
 import Button from "components/CustomButton/CustomButton.jsx";
+import Select from 'react-select';
 import NativeSelect from '@material-ui/core/NativeSelect';
 import axios from "axios";
-
+import {apiConfig} from "../ApiConfig.js"
 class SignalerCas extends Component {
+  constructor(props){
+    super(props);
 
-
-    state ={
+    this.state ={
       casSignaler:[],
       Region:[],
       
      
     };
-    componentDidMount(){
-
-      axios.get(' http://localhost:8000/api/InfoRegion/'
-      ).then(res =>{
-          console.log(res);
-       
-          this.setState({casSignaler:res.data});
-        }
-    
-        );
-        axios.get(' http://localhost:8000/api/region/'
-        ).then(res =>{
-            console.log(res);
-           console.log(" localStorage.getItem('role')}");
-            this.setState({Region:res.data});
-            let options = res.data.map( Region => ({ value: Region.id, label: Region.title }));
-            return { options };
-          }
-      
-          );
-      
-    }
+    this.change= this.change.bind(this);
+    this.submit =this.submit.bind(this);
+    this.regionChange = this.regionChange.bind(this);
+    this.degreChange = this.degreChange.bind(this);
+  }
   change = (e) => {
    
     this.setState({ [e.target.name]: e.target.value });
@@ -56,8 +59,7 @@ class SignalerCas extends Component {
     if ( this.state.suspect==null){
      return 
     }else{
-    axios.post('http://localhost:8000/api/InfoRegion/', {
-      
+    axios.post(apiConfig.infoRegionUrl, {
       suspect: this.state.suspect,
       confirme:this.state.confirme,
       critique: this.state.critique,
@@ -65,17 +67,44 @@ class SignalerCas extends Component {
       guerie: this.state.guerie,
       region: this.state.region,
       degre: this.state.degre,
+      agent:localStorage.getItem('id')
       
-    }).then(res => {
-      console.log(res);
-      this.componentDidMount();
- }
+    }
+    ).then(res => {
+  
+      this.cancelCourse();
+      console.log(res)
+    }
     ).catch((error) => {
       console.log(error);
     });
-    }
   }
+  }
+  
 
+  componentDidMount(){
+
+    axios.get(apiConfig.infoRegionUrl
+    ).then(res =>{
+        console.log(res);
+     
+        this.setState({casSignaler:res.data});
+      }
+  
+      );
+      axios.get(apiConfig.regionUrl
+      ).then(res =>{
+          console.log(res);
+          this.setState({Region:res.data});
+          let options = res.data.map( Region => ({ value: Region.id, label: Region.title }));
+          return { options };
+        }
+    
+        );
+    
+  }
+ 
+  
  
   regionChange(event) {
   
@@ -90,12 +119,24 @@ class SignalerCas extends Component {
     console.log(this.state.degre)
     
   }
+  cancelCourse(){
+    this.refs.a.value="";
+    this.refs.b.value="";
+    this.refs.c.value="";
+    this.refs.d.value="";
+    this.refs.e.value="";
+   
 
+
+
+  }
 
 
   render() {
   
   
+    
+
     this.state.Region.map(region => {
 console.log(region.nom)
     })
@@ -142,7 +183,6 @@ console.log(region.nom)
                     placeholder="degre"
                     onChange={this.degreChange}
                     >
-                    <option></option>
                     <option value={1}  style={{color: "green"}}>Vert</option>
                     <option value={2} style={{color: "orange"}}>Orange</option>
                     <option value={3} style={{color: "red"}}>Rouge</option>
@@ -155,25 +195,25 @@ console.log(region.nom)
                   
                     <Col md={4}>
                       <h6> Cas suspects</h6>
-                    <input type="titre" className="form-control" placeholder=" Cas suspects"  onChange={e =>this.change(e)}  value={this.state.Region.suspect}  name ="suspect"  />
+                    <input type="titre" className="form-control" placeholder=" Cas suspects"  onChange={e =>this.change(e)}  value={this.state.Region.suspect}  name ="suspect"  ref="a"/>
                     </Col>
                     <Col md={4}>
                     <h6> Cas confirmés</h6>
-                    <input type="titre"  className="form-control"  placeholder="Cas confirmés " onChange={e =>this.change(e)}  value={this.state.Region.confirme}  name ="confirme"   />
+                    <input type="titre"  className="form-control"  placeholder="Cas confirmés " onChange={e =>this.change(e)}  value={this.state.Region.confirme}  name ="confirme" ref="b"  />
                     </Col>
                     <Col md={4}>
                     <h6> Cas  critique</h6>
-                    <input type="titre"  className="form-control"  placeholder="Cas critique " onChange={e =>this.change(e)}  value={this.state.Region.critique}  name ="critique"  />
+                    <input type="titre"  className="form-control"  placeholder="Cas critique " onChange={e =>this.change(e)}  value={this.state.Region.critique}  name ="critique" ref="c"  />
                     </Col>
                   </Row>
                   <Row>
                     <Col md={6}>
                     <h6> Cas  morts</h6>
-                    <input type="titre" className="form-control" placeholder="Cas morts"  onChange={e =>this.change(e)}  value={this.state.Region.mort}  name ="mort"  />
+                    <input type="titre" className="form-control" placeholder="Cas morts"  onChange={e =>this.change(e)}  value={this.state.Region.mort}  name ="mort" ref="d" />
                     </Col>
                     <Col md={6}>
                     <h6> Cas  guérie</h6>
-                    <input type="titre" className="form-control" placeholder="Cas guérie" onChange={e =>this.change(e)}  value={this.state.Region.guerie}  name ="guerie"  />
+                    <input type="titre" className="form-control" placeholder="Cas guérie" onChange={e =>this.change(e)}  value={this.state.Region.guerie}  name ="guerie"  ref="e"/>
                     </Col>
                    
                   </Row>
@@ -213,10 +253,10 @@ console.log(region.nom)
                     <tbody>
                       
                       {this.state.casSignaler.reverse().map(casSignaler => {
-                        
+                         if (casSignaler.agent==localStorage.getItem('id') && casSignaler.valide==1 ){
                         return (
                           <tr >
-                            <td></td>
+                            <td>{casSignaler.date}</td>
 
                             <td>{this.state.Region.map(region => {
                                if (region.id==casSignaler.region){
@@ -232,7 +272,9 @@ console.log(region.nom)
                            <td>{casSignaler.mort}</td>
                           </tr>
                         );
-                      })}
+                       }
+                       })}
+                      
                     </tbody>
                   </Table>
                 }
@@ -262,10 +304,11 @@ console.log(region.nom)
                     <tbody>
                       
                       {this.state.casSignaler.reverse().map(casSignaler => {
-                        
+                  if (casSignaler.agent==localStorage.getItem('id') && casSignaler.valide==0 ){
+
                         return (
                           <tr >
-                              <td></td>
+                              <td>{casSignaler.date}</td>
                             <td>{this.state.Region.map(region => {
                                if (region.id==casSignaler.region){
                               
@@ -280,7 +323,7 @@ console.log(region.nom)
                            <td>{casSignaler.mort}</td>
                           </tr>
                         );
-                      })}
+                }})}
                     </tbody>
                   </Table>
                 }

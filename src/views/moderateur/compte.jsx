@@ -10,6 +10,7 @@ import { Card } from "components/Card/Card.jsx";
 import { FormInputs } from "components/FormInputs/FormInputs.jsx";
 import Button from "components/CustomButton/CustomButton.jsx";
 import axios  from "axios";
+import {apiConfig} from "../ApiConfig.js";
 
 
 class CompteModerateur extends Component {
@@ -22,7 +23,7 @@ class CompteModerateur extends Component {
     };
 
   componentDidMount(){
-      axios.get(' http://localhost:8000/api/user/'
+      axios.get(apiConfig.userUrl
       ).then(res =>{
           console.log(res);
           this.setState({user:res.data});
@@ -36,7 +37,7 @@ class CompteModerateur extends Component {
   }
 
   submit(id,email){
-    axios.put(`http://127.0.0.1:8000/api/user/${id}/editEmail/`,{
+    axios.put(apiConfig.userUrl+`${id}/editEmail/`,{
       "email":email,
     }).then(res=>{
       this.componentDidMount();
