@@ -33,7 +33,7 @@ class CustomCheckbox extends Component {
     const classes =
       inline !== undefined ? "checkbox checkbox-inline" : "checkbox";
     return (
-      <div className={classes}>
+      <div data-testid='customchck' className={classes}>
         <input
           id={number}
           type="checkbox"

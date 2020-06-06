@@ -32,7 +32,7 @@ class CustomButton extends Component {
       "btn-round": round
     });
 
-    return <Button className={btnClasses} {...rest} />;
+    return <Button data-testid = "custombtn" className={btnClasses} {...rest} />;
   }
 }
 

@@ -5,16 +5,17 @@
   "dependencies": {
     "@material-ui/core": "^4.10.1",
     "@material-ui/icons": "^4.9.1",
+    "@testing-library/jest-dom": "^5.9.0",
     "axios": "^0.19.2",
     "bootstrap": "^4.4.1",
     "chartist": "0.10.1",
     "file-extension": "^4.0.5",
     "jwt-decode": "^2.2.0",
     "node-sass": "^4.14.1",
-    "react": "16.8.6",
+    "react": "^16.8.0",
     "react-bootstrap": "0.32.4",
     "react-chartist": "0.13.3",
-    "react-dom": "16.8.6",
+    "react-dom": "^16.8.0",
     "react-file-viewer": "^0.5.0",
     "react-google-maps": "9.4.5",
     "react-notification-system": "0.2.17",
@@ -28,9 +29,12 @@
     "suneditor-react": "^2.8.0"
   },
   "devDependencies": {
+    "@testing-library/react": "^10.0.4",
     "@types/googlemaps": "3.30.19",
     "@types/markerclustererplus": "2.1.33",
     "@types/react": "16.8.13",
+    "jest-dom": "^4.0.0",
+    "react-test-renderer": "^16.8.0",
     "typescript": "3.4.3"
   },
   "scripts": {

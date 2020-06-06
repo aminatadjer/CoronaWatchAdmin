@@ -22,7 +22,7 @@ class CustomRadio extends Component {
     const { number, label, option, name, ...rest } = this.props;
 
     return (
-      <div className="radio">
+      <div data-testid='customrd' className="radio">
         <input id={number} name={name} type="radio" value={option} {...rest} />
         <label htmlFor={number}>{label}</label>
       </div>

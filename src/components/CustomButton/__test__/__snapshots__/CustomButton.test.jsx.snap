@@ -1,0 +1,46 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matches snapshot 1`] = `
+<button
+  className="btn-fill btn btn-default"
+  data-testid="custombtn"
+  disabled={false}
+  type="button"
+/>
+`;
+
+exports[`matches snapshot 2`] = `
+<button
+  className="btn-block btn btn-default"
+  data-testid="custombtn"
+  disabled={false}
+  type="button"
+/>
+`;
+
+exports[`matches snapshot 3`] = `
+<button
+  className="btn-round btn btn-default"
+  data-testid="custombtn"
+  disabled={false}
+  type="button"
+/>
+`;
+
+exports[`matches snapshot 4`] = `
+<button
+  className="pull-right btn btn-default"
+  data-testid="custombtn"
+  disabled={false}
+  type="button"
+/>
+`;
+
+exports[`matches snapshot 5`] = `
+<button
+  className="btn-simple btn btn-default"
+  data-testid="custombtn"
+  disabled={false}
+  type="button"
+/>
+`;

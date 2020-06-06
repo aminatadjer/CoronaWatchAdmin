@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matches snapshot 1`] = `
+<div
+  className="radio"
+  data-testid="customrd"
+>
+  <input
+    type="radio"
+  />
+  <label>
+    This is a radiobutton
+  </label>
+</div>
+`;
+
+exports[`matches snapshot 2`] = `
+<div
+  className="radio"
+  data-testid="customrd"
+>
+  <input
+    id={1}
+    type="radio"
+  />
+  <label
+    htmlFor={1}
+  />
+</div>
+`;
+
+exports[`matches snapshot 3`] = `
+<div
+  className="radio"
+  data-testid="customrd"
+>
+  <input
+    type="radio"
+    value={true}
+  />
+  <label />
+</div>
+`;
