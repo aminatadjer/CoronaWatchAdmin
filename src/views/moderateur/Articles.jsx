@@ -7,6 +7,7 @@ import CancelIcon from '@material-ui/icons/Cancel';
 import FileViewer from 'react-file-viewer';  
 import  axios from "axios";
 import {apiConfig} from "../ApiConfig.js";
+import ReactPlayer from 'react-player'
 
 
 var fileExtension = require('file-extension');
@@ -51,14 +52,16 @@ class TableList extends Component {
  
   List(file_extention,media) {
     if (file_extention=="png" || file_extention=="jpg" ) {
-      return <img src={media} style={{ height :'500PX',width:'600px',  textAlign:' center',justifyContent: 'center', alignItems: 'center',position:' relative'}} ></img>
+      return <img src={media} style={{ height :'500px',width:'100%',  textAlign:' center',justifyContent: 'center', alignItems: 'center',position:' relative'}} ></img>
 
       ;
     }else{
       if(file_extention=="mp4"){
-        return    <FileViewer 
-        fileType={"mp4"}
-        filePath={media}></FileViewer>
+        return  <ReactPlayer
+        width='100%'
+        height ='500px'
+        controls='true'
+         url={media} />  
       }
     }
    
@@ -69,12 +72,14 @@ class TableList extends Component {
    {
     return (
       <ul> 
-        {this.state.articles.reverse().map(articles => {
-          if (articles.vu==0){
-            return  <div className="content">
+        
+             <div className="content">
             <Grid fluid>
+
               <Row>
-                <Col md={12}>
+              {this.state.articles.reverse().map(articles => {
+          if (articles.vu==0){
+            return  <Col md={6}>
                   <Card
                     title={"Num" +articles.id + ": "+ articles.titre}
                     category={"Ecrit par hadjer "  }
@@ -89,8 +94,6 @@ class TableList extends Component {
                               __html:articles.contenu
                             }}>
                         </p>
-
-                        <hr/>
 
                         <p align ="center" >
                            {this.List(fileExtension(articles.media),articles.media) }
@@ -119,12 +122,13 @@ class TableList extends Component {
                       }
                    />
                 </Col>
+                   }})
+                  }
               </Row>
             </Grid>
           </div>
                     
-         }})
-       }
+      
      </ul>
     )
   }
