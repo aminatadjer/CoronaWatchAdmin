@@ -73,6 +73,7 @@ class SignalerCas extends Component {
     ).then(res => {
   
       this.cancelCourse();
+      this.componentDidMount();
       console.log(res)
     }
     ).catch((error) => {
@@ -110,6 +111,7 @@ class SignalerCas extends Component {
   
     this.setState({region: event.target.value});
     console.log(this.state.region)
+
     
   }
 
@@ -126,8 +128,6 @@ class SignalerCas extends Component {
     this.refs.d.value="";
     this.refs.e.value="";
    
-
-
 
   }
 

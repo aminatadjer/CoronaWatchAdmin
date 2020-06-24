@@ -1,9 +1,27 @@
 
 import React, { Component } from "react";
 import { Grid, Row, Col, Alert } from "react-bootstrap";
-
+import {apiConfig} from "../ApiConfig.js";
+import  axios from "axios";
 
 class AgentSanteNotifications extends Component {
+  state ={
+    region:[],
+  };
+  componentDidMount(){
+
+   
+    axios.get(apiConfig. infoRegionUrl
+    ).then(res =>{
+        console.log(res);
+        this.setState({region:res.data});
+       
+      }
+  
+      );
+    
+}
+
   render() {
     return (
       <div className="content">
@@ -17,96 +35,33 @@ class AgentSanteNotifications extends Component {
               <Row>
                 <Col md={6}>
                   <h5>Mise a jour accepter par le modérateur</h5>
-                  <Alert bsStyle="success">
+                  {this.state.region.reverse().map(region => {
+                   if (region.valide==1){
+                  return <Alert bsStyle="success">
                     <button type="button" aria-hidden="true" className="close">
                       &#x2715;
                     </button>
                     <span>
-                      <b> Success - </b> Le modérateur a validé la mise a jour des cas num 14
+                      <b> Success - </b> Le modérateur a validé la mise a jour des cas N°:{region.id}
                     </span>
                   </Alert>
-                 
-                  <Alert bsStyle="success">
-                    <button type="button" aria-hidden="true" className="close">
-                      &#x2715;
-                    </button>
-                    <span>
-                      <b> Success - </b> Le modérateur a validé la mise a jour des regions a risque num 05
-                    </span>
-                  </Alert>
-                  <Alert bsStyle="success">
-                    <button type="button" aria-hidden="true" className="close">
-                      &#x2715;
-                    </button>
-                    <span>
-                      <b> Success - </b> Le modérateur a validé la mise a jour des cas num 12
-                    </span>
-                  </Alert>
-                  <Alert bsStyle="success">
-                    <button type="button" aria-hidden="true" className="close">
-                      &#x2715;
-                    </button>
-                    <span>
-                      <b> Success - </b> Le modérateur a validé la mise a jour des cas num 09
-                    </span>
-                  </Alert>
-                  <Alert bsStyle="success">
-                    <button type="button" aria-hidden="true" className="close">
-                      &#x2715;
-                    </button>
-                    <span>
-                      <b> Success - </b> Le modérateur a validé la mise a jour des regions à risques num 03
-                    </span>
-                  </Alert>
-                  <Alert bsStyle="success">
-                    <button type="button" aria-hidden="true" className="close">
-                      &#x2715;
-                    </button>
-                    <span>
-                      <b> Success - </b> Le modérateur a validé la mise a jour des regions à risques num 03
-                    </span>
-                  </Alert>
-                 
+                    }})
+                  }
+  
                 </Col>
                 <Col md={6}>
-                  <h5>Mise a jour supprimer par le modérateur</h5>
-                 
-                  
-                  <Alert bsStyle="warning">
+                  <h5>Mise a jour supprimer par le modérateur</h5>                
+                  {this.state.region.reverse().map(region => {
+                   if (region.supprime==1){
+                 return <Alert bsStyle="warning">
                     <button type="button" aria-hidden="true" className="close">
                       &#x2715;
                     </button>
                     <span>
-                      <b> Warning - </b>Le modérateur a supprimer la mise a jour des cas num 02
+                      <b> Warning - </b> Le modérateur a supprimer la mise a jour des cas N°:{region.id}
                     </span>
-                  </Alert>
-                  <Alert bsStyle="warning">
-                    <button type="button" aria-hidden="true" className="close">
-                      &#x2715;
-                    </button>
-                    <span>
-                      <b> Warning - </b> Le modérateur a supprimer la mise a jour des cas num 00
-                    </span>
-                  </Alert>
-                  <Alert bsStyle="warning">
-                    <button type="button" aria-hidden="true" className="close">
-                      &#x2715;
-                    </button>
-                    <span>
-                      <b> Warning - </b> Le modérateur a supprimer la mise a jour des cas num 06
-                    </span>
-                  </Alert>
-                  <Alert bsStyle="warning">
-                    <button type="button" aria-hidden="true" className="close">
-                      &#x2715;
-                    </button>
-                    <span>
-                      <b> Warning - </b> Le modérateur a supprimer la mise a jour des regions à risque num 03
-                    </span>
-                  </Alert>
-                 
-                  
-                  
+                  </Alert>                              
+                }})}             
                 </Col>
               </Row>
               <br />

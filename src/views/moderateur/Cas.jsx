@@ -56,7 +56,7 @@ class Cas extends Component {
  
   List(file_extention,media) {
     if (file_extention=="png" || file_extention=="jpg" ) {
-      return <img src={media} style={{ height :'30%',width:'50%',  textAlign:' center',justifyContent: 'center', alignItems: 'center',position:' relative'}} ></img> ;
+      return <img src={media} style={{ height :'100%',width:'100%',  textAlign:' center',justifyContent: 'center', alignItems: 'center',position:' relative'}} ></img> ;
     }else{
       if(file_extention=="mp4"){
         return <FileViewer 
@@ -78,13 +78,13 @@ class Cas extends Component {
   return (
 
   <div>
-    <br/> {
-      this.state.casSignaler.reverse().map(casSignaler => {
-        if (casSignaler.vu==0){
-              return  <div className="content">
+    <br/> <div className="content">
               <Grid fluid>
                 <Row>
-                  <Col md={12}>
+                {
+      this.state.casSignaler.reverse().map(casSignaler => {
+        if (casSignaler.vu==0){
+              return <Col md={6}>
                     <Card
                       title={"Commentaire: " +casSignaler.commentaire}
                       category={"Cas suspect numéro: " +casSignaler.id +", signaler le :" +casSignaler.date }
@@ -120,12 +120,13 @@ class Cas extends Component {
                         }
                        />
                   </Col>
+                    }
+                  })}
                 </Row>
               </Grid>
             </div>
             
-          }
-        })}
+        
   </div> 
    )}           
 }

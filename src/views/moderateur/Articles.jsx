@@ -52,7 +52,7 @@ class TableList extends Component {
  
   List(file_extention,media) {
     if (file_extention=="png" || file_extention=="jpg" ) {
-      return <img src={media} style={{ height :'500px',width:'100%',  textAlign:' center',justifyContent: 'center', alignItems: 'center',position:' relative'}} ></img>
+      return <img src={media} style={{ height :'100%',width:'100%',  textAlign:' center',justifyContent: 'center', alignItems: 'center',position:' relative'}} ></img>
 
       ;
     }else{

@@ -1,8 +1,38 @@
 
 import React, { Component } from "react";
 import { Grid, Row, Col, Alert } from "react-bootstrap";
-
+import {apiConfig} from "../ApiConfig.js";
+import  axios from "axios";
 class ModerateurNotifications extends Component {
+  state ={
+    video:[],
+    article:[],
+    zone:[],
+  
+  };
+  componentDidMount(){
+
+    axios.get(apiConfig.videoUrl
+    ).then(res =>{
+        console.log(res);
+        this.setState({video:res.data});
+      }); 
+
+    axios.get(apiConfig.articleUrl
+        ).then(res =>{
+            console.log(res);
+            this.setState({article:res.data});
+          });
+
+     axios.get(apiConfig.infoRegionUrl
+            ).then(res =>{
+                console.log(res);
+         
+                this.setState({zone:res.data});
+              }
+          
+              );
+  }
   render() {
     return (
       <div className="content">
@@ -16,134 +46,54 @@ class ModerateurNotifications extends Component {
             <div className="content">
               <Row>
                 <Col md={3}>
-                  <h5>Articles Rédacteur</h5>
-                  <Alert >
-                    <button type="button" aria-hidden="true" className="close">
-                      &#x2715;
-                    </button>
-                    <span>
-                       Le rédacteur 03 a ajouter son article num 02
-                    </span>
-                  </Alert>
                  
-                  <Alert >
-                    <button type="button" aria-hidden="true" className="close">
-                      &#x2715;
-                    </button>
+                
+                  <h3>Articles Rédacteur</h3>
+                  {this.state.article.reverse().map(article => {
+                   if (article.vu==0){
+                  return <Alert>
+                   
                     <span>
-                    Le rédacteur 03 a modifier son article num 02
+                     un Nouveau article à traiter: N° {article.id}
                     </span>
-                  </Alert>
-                  <Alert >
-                    <button type="button" aria-hidden="true" className="close">
-                      &#x2715;
-                    </button>
-                    <span>
-                    Le rédacteur 02 a ajouter son article num 04
-                    </span>
-                  </Alert>
-                  <Alert >
-                    <button type="button" aria-hidden="true" className="close">
-                      &#x2715;
-                    </button>
-                    <span>
-                    Le rédacteur 03 a supprimer son article num 01
-                    </span>
-                  </Alert>
+                   </Alert>
+                     }})
+                    }
                  
+                
                  
                 </Col>
                 <Col md={3}>
-                  <h5>Agent de santé</h5>
-                 
-                  
-                  <Alert bsStyle="danger">
-                    <button type="button" aria-hidden="true" className="close">
-                      &#x2715;
-                    </button>
+                
+                  <h3>Agent de santé</h3>
+                  {this.state.zone.reverse().map(zone => {
+                   if (zone.vu==0){
+                  return <Alert bsStyle="danger">
+                   
                     <span>
-                      Mise a jour des zones a risque num 04
+                    Mise a jour d"une zone de risque: N° {zone.id}
                     </span>
-                  </Alert>
-                  <Alert bsStyle="danger">
-                    <button type="button" aria-hidden="true" className="close">
-                      &#x2715;
-                    </button>
-                    <span>
-                    Mise a jour des cas num 05
-                    </span>
-                  </Alert>
-                  <Alert bsStyle="danger">
-                    <button type="button" aria-hidden="true" className="close">
-                      &#x2715;
-                    </button>
-                    <span>
-                    Mise a jour des zones a risque num 02
-                    </span>
-                  </Alert>
-                  <Alert bsStyle="danger">
-                    <button type="button" aria-hidden="true" className="close">
-                      &#x2715;
-                    </button>
-                    <span>
-                    Mise a jour des cas a risque num 04
-                    </span>
-                  </Alert>
-                 
-                  
+                   </Alert>
+                     }})
+                    }
+                             
                   
                 </Col>
                 <Col md={3}>
-                  <h5>Vidéo utilisateur</h5>
-                  <Alert bsStyle="success">
-                    <button type="button" aria-hidden="true" className="close">
-                      &#x2715;
-                    </button>
+                  <h3>Vidéo utilisateur</h3>
+                  {this.state.video.reverse().map(video => {
+                   if (video.vu==0){
+                  return <Alert bsStyle="success">
+                   
                     <span>
-                      L'utilisateur lydia a ajouter une vidéo
+                     un nouvelle video à traiter: N° {video.id}
                     </span>
-                  </Alert>
+                   </Alert>
+                     }})
+                    }
                  
-                  <Alert bsStyle="success">
-                    <button type="button" aria-hidden="true" className="close">
-                      &#x2715;
-                    </button>
-                    <span>
-                    L'utilisateur amina a ajouter une vidéo
-                    </span>
-                  </Alert>
-                  <Alert bsStyle="success">
-                    <button type="button" aria-hidden="true" className="close">
-                      &#x2715;
-                    </button>
-                    <span>
-                    L'utilisateur lilia a ajouter une vidéo
-                    </span>
-                  </Alert>
-                  <Alert bsStyle="success">
-                    <button type="button" aria-hidden="true" className="close">
-                      &#x2715;
-                    </button>
-                    <span>
-                    L'utilisateur lydia a ajouter une vidéo
-                    </span>
-                  </Alert>
-                  <Alert bsStyle="success">
-                    <button type="button" aria-hidden="true" className="close">
-                      &#x2715;
-                    </button>
-                    <span>
-                    L'utilisateur amina a ajouter une vidéo
-                    </span>
-                  </Alert>
-                  <Alert bsStyle="success">
-                    <button type="button" aria-hidden="true" className="close">
-                      &#x2715;
-                    </button>
-                    <span>
-                       Le modérateur a validé la mise a jour des regions à risques num 03
-                    </span>
-                  </Alert>
+                 
+              
                  
                 </Col>
                 <Col md={3}>
@@ -158,31 +108,7 @@ class ModerateurNotifications extends Component {
                       Nouvelle publication Facebook 
                     </span>
                   </Alert>
-                  <Alert bsStyle="warning">
-                    <button type="button" aria-hidden="true" className="close">
-                      &#x2715;
-                    </button>
-                    <span>
-                      Nouvelle vidéo youtube
-                    </span>
-                  </Alert>
-                  <Alert bsStyle="warning">
-                    <button type="button" aria-hidden="true" className="close">
-                      &#x2715;
-                    </button>
-                    <span>
-                      4 Nouveaux article sur le web
-                    </span>
-                  </Alert>
-                  <Alert bsStyle="warning">
-                    <button type="button" aria-hidden="true" className="close">
-                      &#x2715;
-                    </button>
-                    <span>
-                      Nouvelle publication Facebook 
-                    </span>
-                  </Alert>
-                 
+               
                   
                   
                 </Col>

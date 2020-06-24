@@ -19,6 +19,8 @@ export const apiConfig=
     articleUrl:'http://127.0.0.1:8000/api/article/',
      //video
      videoUrl:'http://127.0.0.1:8000/api/video/',
+     //comment
+     commentUrl:'http://127.0.0.1:8000/api/comment/',
    
 }
 

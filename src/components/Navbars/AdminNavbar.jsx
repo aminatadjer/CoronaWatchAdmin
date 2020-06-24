@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Navbar, NavItem, Nav, MenuItem,NavDropdown,Row } from "react-bootstrap";
 
 import AdminNavbarLinks from "./AdminNavbarLinks.jsx";
+import { NavbarBrand } from "reactstrap";
 
 class Header extends Component {
   constructor(props) {
@@ -33,21 +34,37 @@ class Header extends Component {
     document.body.appendChild(node);
   }
   render() {
+    const notification = (
+      <div>
+        <i className="fa fa-globe" />
+        <b className="caret" />
+        <span className="notification">5</span>
+        <p className="hidden-lg hidden-md">Notification</p>
+      </div>
+    );
     return (
       <Navbar fluid>
         <Navbar.Header>
           <Navbar.Brand>
             <a href="#pablo">{this.props.brandText}</a>
           </Navbar.Brand>
+        
           
         </Navbar.Header>
+        <Nav >
+          
         
-       
+          
+        </Nav>
+        
+    
+      
           
         <Nav pullRight className="flex-row">
           
           <NavItem eventKey={1} href="#">
             Mon Compte
+            
           </NavItem> 
           <NavItem onClick={e=>this.logout(e)} >
             Deconnexion

@@ -4,8 +4,32 @@ import { Grid, Row, Col, Table } from "react-bootstrap";
 import Card from "components/Card/Card.jsx";
 import IconButton from '@material-ui/core/IconButton';
 import CancelIcon from '@material-ui/icons/Cancel';
-
+import  axios from "axios";
+import {apiConfig} from "../ApiConfig.js";
 class Commentaire extends Component {
+  state ={
+    comment:[],
+    
+  };
+  componentDidMount(){
+
+    axios.get(apiConfig.commentUrl
+    ).then(res =>{
+        console.log(res);
+        this.setState({comment:res.data});
+      }); 
+  }
+  deleteClick(id){
+ 
+    axios.put(apiConfig.commentUrl+`${id}/CommentSupprimer/`,{
+      
+      "supprime":1,
+    }).then(res=>{
+      this.componentDidMount();
+      console.log(res)
+    });
+  }
+ 
   render() {
     return (
       <div className="content">
@@ -29,51 +53,22 @@ class Commentaire extends Component {
                         </thead>
                         
                         <tbody>
-                          <tr>
-                              <td>1</td>
-                              <td>CORONAVIRUS - Dans le monde, le coronavirus a contaminé plus de 212 000 personnes dans 157 pays et fait plus de 8700 morts. Dernier bilan en France, régions les plus touchées, confinement et déplacements autorisés sur attestation, délivrance et restriction de médicament, carte des cas, conseils pour se protéger... Le point en direct.</td>
+                        {
+                          this.state.comment.reverse().map(comment => {
+                            if (comment.supprime==0){
+                            return <tr>
+                              <td>{comment.id}</td>
+                              <td>{comment.contenu}</td>
                               <td> <IconButton 
+                                    onClick={() => this.deleteClick(comment.id)}
                                     style={{ background:'#e6e6e6', color: '#ff0000' }}
                                     aria-label="delete">
                                     <CancelIcon fontSize="large" />
                                   </IconButton>
                               </td>                    
                           </tr>
-
-                          <tr>
-                              <td>2</td>
-                              <td>CORONAVIRUS - Dans le monde, le coronavirus a contaminé plus de 212 000 personnes dans 157 pays et fait plus de 8700 morts. Dernier bilan en France, régions les plus touchées, confinement et déplacements autorisés sur attestation, délivrance et restriction de médicament, carte des cas, conseils pour se protéger... Le point en direct.</td>
-                              <td><IconButton 
-                                      style={{ background:'#e6e6e6', color: '#ff0000' }}
-                                      aria-label="delete">
-                                      <CancelIcon fontSize="large" />
-                                  </IconButton>
-                                </td>
-                              
-                           </tr>
-
-                            <tr>
-                              <td>3</td>
-                              <td>CORONAVIRUS - Dans le monde, le coronavirus a contaminé plus de 212 000 personnes dans 157 pays et fait plus de 8700 morts. Dernier bilan en France, régions les plus touchées, confinement et déplacements autorisés sur attestation, délivrance et restriction de médicament, carte des cas, conseils pour se protéger... Le point en direct.</td>
-                              <td><IconButton 
-                                      style={{ background:'#e6e6e6', color: '#ff0000' }}
-                                      aria-label="delete">
-                                      <CancelIcon fontSize="large" />
-                                  </IconButton>
-                              </td>
-                                        
-                            </tr>
-                            <tr>
-                            
-                              <td>4</td>
-                              <td>CORONAVIRUS - Dans le monde, le coronavirus a contaminé plus de 212 000 personnes dans 157 pays et fait plus de 8700 morts. Dernier bilan en France, régions les plus touchées, confinement et déplacements autorisés sur attestation, délivrance et restriction de médicament, carte des cas, conseils pour se protéger... Le point en direct.</td>
-                              <td><IconButton 
-                                      style={{ background:'#e6e6e6', color: '#ff0000' }}
-                                      aria-label="delete">
-                                      <CancelIcon fontSize="large" />
-                                  </IconButton></td>
-                            
-                            </tr>
+                          
+                        }})}
                       
                     </tbody>
                   </Table>

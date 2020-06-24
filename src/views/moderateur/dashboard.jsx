@@ -13,8 +13,56 @@ import {
   legendSales,
   
 } from "variables/Variables.jsx";
+import {apiConfig} from "../ApiConfig.js";
+import  axios from "axios";
 
 class DashboardModerateur extends Component {
+  state ={
+    casSignaler:[],
+    articles:[],
+    video:[],
+    zone:[],
+    count:0
+
+  };
+  componentDidMount(){
+
+    axios.get(apiConfig.CasUrl
+            ).then(res =>{
+            console.log(res);
+            this.setState({casSignaler:res.data});
+          }); 
+
+    axios.get(apiConfig.videoUrl
+           ).then(res =>{
+            console.log(res);
+            this.setState({video:res.data});
+        }); 
+    axios.get(apiConfig.articleUrl
+            ).then(res =>{
+            console.log(res);
+            
+            this.setState({article:res.data});
+         
+        }); 
+  }
+ 
+  numArticle(){
+    
+    this.state.articles.map(articles => {
+      if (articles.vu==0){
+    
+        this.setState({ count: this.state.count+1 });
+      }})
+      this.state.count= this.state.count+1;
+      console.log(this.state.count)
+      return this.state.count
+     
+  }
+ 
+
+ 
+ 
   createLegend(json) {
     var legend = [];
     for (var i = 0; i < json["names"].length; i++) {
@@ -26,15 +74,17 @@ class DashboardModerateur extends Component {
     return legend;
   }
   render() {
+    
     return (
       <div className="content">
         <Grid fluid>
           <Row>
             <Col md={4}>
+              
               <StatsCard
                 bigIcon={<i className="pe-7s-news-paper text-info" />}
                 statsText="Article a traité"
-                statsValue="10"
+                statsValue={this.numArticle()}
                 statsIcon={<i className="fa fa-refresh" />}
                 statsIconText="Mise a jour maintenant"
               />

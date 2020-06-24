@@ -4,7 +4,10 @@ import { Route, Switch } from "react-router-dom";
 import NotificationSystem from "react-notification-system";
 
 import AdminNavbar from "components/Navbars/AdminNavbar";
+
+
 import Footer from "components/Footer/Footer";
+
 import Sidebar from "components/Sidebar/SidebarModerateur";
 
 import { style } from "variables/Variables.jsx";
@@ -153,8 +156,17 @@ class Admin extends Component {
     }
   }
   render() {
+    const notification = (
+      <div>
+        <i className="fa fa-globe" />
+        <b className="caret" />
+        <span className="notification">5</span>
+        <p className="hidden-lg hidden-md">Notification</p>
+      </div>
+    );
     return (
       <div className="wrapper">
+           
         <NotificationSystem ref="notificationSystem" style={style} />
         <Sidebar {...this.props} routes={routes} image={this.state.image}
         color={this.state.color}
@@ -164,6 +176,7 @@ class Admin extends Component {
             {...this.props}
             brandText={this.getBrandText(this.props.location.pathname)}
           />
+          
           <Switch>{this.getRoutes(routes)}</Switch>
           <Footer />
          
