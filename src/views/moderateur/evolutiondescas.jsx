@@ -13,8 +13,6 @@ class EvolutionCasModerateur extends Component {
     casSignaler:[],
     region:[],
     user:[],
-
- 
   };
 
   componentDidMount(){

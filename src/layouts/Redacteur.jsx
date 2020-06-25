@@ -5,7 +5,7 @@ import NotificationSystem from "react-notification-system";
 
 import AdminNavbar from "components/Navbars/AdminNavbar";
 import Footer from "components/Footer/Footer";
-import Sidebar from "components/Sidebar/SidebarAgent";
+import Sidebar from "components/Sidebar/SidebarRedacteur";
 
 import { style } from "variables/Variables.jsx";
 

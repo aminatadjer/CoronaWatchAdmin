@@ -21,6 +21,7 @@ export const apiConfig=
      videoUrl:'http://127.0.0.1:8000/api/video/',
      //comment
      commentUrl:'http://127.0.0.1:8000/api/comment/',
-   
+     //googleRobot
+     googleUrl:'http://127.0.0.1:8000/api/robot/google/',
 }
 

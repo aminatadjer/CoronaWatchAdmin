@@ -4,114 +4,181 @@ import {
   Grid,
   Row,
   Col,
-  FormGroup,
-  ControlLabel,
-  FormControl
+ 
 } from "react-bootstrap";
-
 import { Card } from "components/Card/Card.jsx";
 import { FormInputs } from "components/FormInputs/FormInputs.jsx";
-import { UserCard } from "components/UserCard/UserCard.jsx";
-import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
-import BorderColor from '@material-ui/icons/BorderColor';
-import Button from '@material-ui/core/Button';
-import { makeStyles } from '@material-ui/core/styles';
-import DeleteIcon from '@material-ui/icons/Delete';
-import CloudUploadIcon from '@material-ui/icons/CloudUpload';
-import KeyboardVoiceIcon from '@material-ui/icons/KeyboardVoice';
-import Icon from '@material-ui/core/Icon';
-import SaveIcon from '@material-ui/icons/Save';
+import Button from "components/CustomButton/CustomButton.jsx";
+import  axios from "axios";
+import {apiConfig} from "../ApiConfig.js"
+class Compte extends Component {
+   
 
-import avatar from "assets/img/faces/face-3.jpg";
+    state ={
+      user:[],
+      email:'',
+      region:[],
+    };
 
-class Profile extends Component {
-  render() {
-    return (
-      <div className="content">
-        <Grid fluid>
-          <Row>
-            <Col md={8}>
-              <Card
-                title="Lydia Benaida"
-                content={
-                  <form>
-                    <FormInputs
-                      ncols={["col-md-5"]}
-                      properties={[
-                       
-                        {
-                          label: "Nom d'utilisateur",
-                          type: "text",
-                          bsClass: "form-control",
-                          placeholder: "Lydia Benaida",
-                          defaultValue: "Lydia Benaida"
-                        }
-                      
-                      ]}
-                    />
-                        <FormInputs
-                      ncols={["col-md-5"]}
-                      properties={[
-                       
-                        {
-                            label: "Adresse mail",
-                            type: "email",
-                            bsClass: "form-control",
-                            placeholder: "gl_benaida@esi.dz",
-                            defaultValue: "gl_benaida@esi.dz"
-                          }
-                      ]}
-                    />
-                        <FormInputs
-                      ncols={["col-md-5"]}
-                      properties={[
-                        {
-                            label: "Nom",
-                            type: "text",
-                            bsClass: "form-control",
-                            placeholder: "Nom",
-                            defaultValue: "Benaida"
-                          }
-                       
-                      ]}
-                    />
-                    <FormInputs
-                      ncols={["col-md-6"]}
-                      properties={[
-                        {
-                            label: "Prenom",
-                            type: "text",
-                            bsClass: "form-control",
-                            placeholder: "Prenom",
-                            defaultValue: "Lydia"
-                          }
-                      ]}
-                    />
-                   
-                   
-
-                   
-                   <Button
-          style={{ background:'#ff9900', color: 'black' ,position:'relative', left:'0px', top:'2px',width:'180PX',fontSize:'15px'}}
-        variant="contained"
-        color="Green"
-       
-        startIcon={<BorderColor />}
-      >
-    <strong>    Modifier</strong>
-      </Button>
-                 
-                    <div className="clearfix" />
-                  </form>
-                }
-              />
-            </Col>
-           
-          </Row>
-        </Grid>
-      </div>
-    );
+    componentDidMount(){
+  
+      axios.get(apiConfig.userUrl
+      ).then(res =>{
+          console.log(res);
+          this.componentDidMount();
+          this.setState({user:res.data});
+      
+        } );
+      
+    }
+   
+  
+  change = (e) => {
+   
+    this.setState({ [e.target.name]: e.target.value });
   }
-}
 
-export default Profile;
+  
+ 
+ 
+  submit(id,email){
+    axios.put(apiConfig.mailUrl,{
+      "email":email,
+     
+    }).then(res=>{
+      this.componentDidMount();
+      console.log(res)
+    }) ;
+    
+  }
+
+  render() {
+   
+    return (
+      <div>
+      <br/> {this.state.user.map(user => {
+  
+        if (user.username==localStorage.getItem('username')){   
+          return <div className="content">
+                   <Grid fluid>
+                      <Row>
+                        <Col md={8}>
+                          <Card
+                            title="Modifier votre compte"
+                            content={
+                              <form onSubmit={e=>this.submit(e)} >
+                                  <FormInputs
+                                  ncols={["col-md-6"]}
+                                  properties={[
+                                    {
+                                      label: "Nom d'utilisateur",
+                                      type: "text",
+                                      bsClass: "form-control",
+                                      placeholder: "nom d'utilisateur",
+                                      defaultValue: user.username,
+                                      disabled: true
+                                    }
+                                  ]}
+                                />
+                                <FormInputs
+                                  ncols={["col-md-6", "col-md-6"]}
+                                  properties={[
+                                    {
+                                      label: "Nom",
+                                      type: "text",
+                                      bsClass: "form-control",
+                                      placeholder: "Statut",
+                                      defaultValue: user.last_name,
+                                      disabled: true
+                                    },
+                                    {
+                                      label: "Prenom",
+                                      type: "text",
+                                      bsClass: "form-control",
+                                      placeholder: "Division",
+                                      defaultValue:  user.first_name,
+                                      disabled: true
+                                    }
+                                  
+                                  ]}
+                                />
+                                 <input type="titre" className="form-control" defaultValue={user.email}  onChange={e =>this.change(e)}    name ="email"  />
+
+                                <Button bsStyle="info" pullRight fill type="submit"  onClick={() => this.submit(localStorage.getItem('id'),this.state.email)}  >
+                                  Sauvegarder
+                                </Button>
+                                <div className="clearfix" />
+                              </form>
+                            }
+                          />
+                        </Col>
+                        <Col md={4}>
+                          <Card
+                              title="Modifier votre Mot de passe" 
+                              content={
+                                <form>
+                                  <FormInputs
+                                  ncols={["col-md-12"]}
+                                  properties={[
+                                    {
+                                      label: "Mot de passe actuel",
+                                      type: "text",
+                                      bsClass: "form-control",
+                                      placeholder: "Mot de passe actuel",
+                                      defaultValue: ""
+                                      
+                                    }
+                                  ]}
+                                  
+                                  />
+                                  <FormInputs
+                                  ncols={["col-md-12"]}
+                                  properties={[
+                                    {
+                                      label: "Nouveau Mot de passe",
+                                      type: "password",
+                                      bsClass: "form-control",
+                                      placeholder: "Nouveau Mot de passe",
+                                      defaultValue: ""
+                                      
+                                    }
+                                  ]}
+                                  
+                                  />
+                                  <FormInputs
+                                  ncols={["col-md-12"]}
+                                  properties={[
+                                    {
+                                      label: "Confirmation Nouveau Mot de passe",
+                                      type: "password",
+                                      bsClass: "form-control",
+                                      placeholder: "Nouveau Mot de passe",
+                                      defaultValue: ""
+                                      
+                                    }
+                                  ]}
+                                  
+                                  />
+
+                                <Button bsStyle="info" pullRight fill type="submit">
+                                  Sauvegarder
+                                </Button> 
+                                <div className="clearfix" />
+                              </form>
+                            }
+                          />
+
+                        </Col>
+                      </Row>
+                    </Grid>
+                  </div>
+                    
+                  }
+            })}
+    </div> 
+       );
+  }
+ }
+
+
+export default Compte;

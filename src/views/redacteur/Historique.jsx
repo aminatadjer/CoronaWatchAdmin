@@ -10,6 +10,7 @@ import FileViewer from 'react-file-viewer';
 import  axios from "axios";
 import CancelIcon from '@material-ui/icons/Cancel';
 import {apiConfig} from "../ApiConfig.js";
+import BorderColor from '@material-ui/icons/BorderColor';
 
 var fileExtension = require('file-extension');
 class TableList extends Component {
@@ -17,35 +18,7 @@ class TableList extends Component {
     articles:[],
   };
  
-  validateClick(id){
-    console.log(id)
-    axios.put(apiConfig.articleUrl+`${id}/ArticleValider/`,{
-      "valide":1,
-      "vu":1,
-    }).then(res=>{
-      this.componentDidMount();
-      console.log(res)
-    })
-   
-    
-  ;
-    
-  }
-  
-  deleteClick(id){
-    console.log(id)
-    axios.put(apiConfig.articleUrl+`${id}/ArticleSupprimer/`,{
-      "supprime":1,
-      "vu":1,
-    }).then(res=>{
-      this.componentDidMount();
-      console.log(res)
-    })
-   
-    
-  ;
-    
-  }
+ 
   componentDidMount(){
 
     axios.get(apiConfig.articleUrl
@@ -60,7 +33,7 @@ class TableList extends Component {
   }
   List(file_extention,media) {
     if (file_extention=="png" || file_extention=="jpg" ) {
-      return <img src={media} style={{ height :'500PX',width:'600px',  textAlign:' center',justifyContent: 'center', alignItems: 'center',position:' relative'}} ></img>
+      return <img src={media} style={{ height :'100%',width:'100%',  textAlign:' center',justifyContent: 'center', alignItems: 'center',position:' relative'}} ></img>
 
       ;
     }else{
@@ -78,22 +51,17 @@ class TableList extends Component {
   
   
     return (
-      <ul>
-        <br/>
-      {
-    
-      this.state.articles.map(articles => {
-      
-   if (articles.valide==0){
-        return  <div className="content">
+     
         <Grid fluid>
+          <br/>
           <Row>
-            <Col md={12}>
+          { this.state.articles.map(articles => {   
+          if (articles.valide==0){
+          return   <Col md={6}>
               <Card
-                title={"Num" +articles.id + ": "+ articles.titre}
-                category={"Statut "  }
-                ctTableFullWidth
-                ctTableResponsive
+                title={"Article N°:" +articles.id}
+               
+                
                 content={
                   <div>
                      <p
@@ -110,43 +78,28 @@ class TableList extends Component {
                     <p align ="center" >
                     {this.List(fileExtension(articles.media),articles.media) }
                   </p>
-                  <div align="center">
                   <Button
-                                  onClick={() => this.validateClick(articles.id)}
-                                  style={{ background:'#87CB16', color: 'black' ,position:'relative', float:'center',width:'20%',fontSize:'15px'}}
-                                  variant="contained"
-                                  color="Green"
-                                  startIcon={<CheckCircleIcon />}
-                                >
-                                  <strong>Valider</strong>
-                                </Button>
-                                <Button
-                                  onClick={() => this.deleteClick(articles.id)}
-                                  variant="contained"
-                                  color="secondary"
-                                  style={{ background:'#FF4A55', color: 'black' ,position:'relative', float:'center',width:'20%',fontSize:'15px'}}
-                                  startIcon={<CancelIcon />}
-                                >
-                                   <strong>  Supprimer</strong>
-                                </Button>
-               
-                        </div>
-
-
+                    style={{ background:'#ff9900', color: 'black' ,position:'relative', left:'0px', top:'2px',width:'180PX',fontSize:'15px'}}
+                    variant="contained"
+                    color="Green"
+                     startIcon={<BorderColor />}
+                  >
+                    <strong>Modifier</strong>
+                  </Button>
                   </div>
-
-          
-                 
+ 
                 }
+                
                 />
+                
               </Col>
-             
+         
+                  }
+                })}
             </Row>
           </Grid>
-        </div>}
-        })}
-      
-      </ul>
+       
+  
     )
   }
 }
