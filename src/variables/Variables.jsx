@@ -613,29 +613,34 @@ const iconsArray = [
 //
 // Data for Pie Chart
 var dataPie = {
-  labels: ["60%", "8,5%", "13%", "18,5",],
+  labels: ["60% ", "8,5%", "13%", "18,5",],
   series: [60, 8.5, 13, 18.5]
 };
 var legendPie = {
-  names: ["Cas Normal", "Fatalité", "Guérisons", "Cas critique"],
-  types: ["info", "danger", "success", "warning"]
+  names: ["Cas Normal", "Fatalité", "Guérisons", "Cas critique", "Cas que"],
+  types: ["danger", "danger", "warning", "warning","success"]
 };
 
 // Data for Line Chart
 var dataSales = {
   labels: [
-    "01/02",
-    "10/02",
-    "20/02",
-    "01/03",
-    "10/03",
-    "20/03",
-    "30/03"
+    "01",
+    "02",
+    "03",
+    "04",
+    "05",
+    "06",
+    "07",
+    "08",
+    "09",
+    "10",
+    "11",
+    "12"
   ],
   series: [
-    [2, 10, 14, 26, 60, 100, 120],
-    [0, 1, 3, 4, 7, 10, 11],
-    [1, 5, 7, 8, 14, 20, 31]
+    [2, 10, 14, 26, 60, 100, 120,57,2,32,23,3],
+    [0, 1, 3, 4, 7, 10, 11, 10,7,29,2,23],
+    [1, 5, 7, 8, 14, 20, 31, 120,7,2,33,3]
   ]
 };
 var optionsSales = {

@@ -3,11 +3,16 @@ import React, { Component } from "react";
 import { Grid, Row, Col, Alert } from "react-bootstrap";
 import {apiConfig} from "../ApiConfig.js";
 import  axios from "axios";
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import 'react-tabs/style/react-tabs.css';
 class ModerateurNotifications extends Component {
   state ={
     video:[],
     article:[],
     zone:[],
+   tweet:[],
+    google:[],
+    comment:[],
   
   };
   componentDidMount(){
@@ -29,27 +34,43 @@ class ModerateurNotifications extends Component {
                 console.log(res);
          
                 this.setState({zone:res.data});
-              }
-          
-              );
+              });
+    axios.get(apiConfig.googleUrl
+            ).then(res =>{
+                console.log(res);
+             
+                  this.setState({google:res.data});
+          });
+    axios.get(apiConfig.tweetUrl
+            ).then(res =>{
+                console.log(res);
+             
+                  this.setState({tweet:res.data});
+    });
+    axios.get(apiConfig.commentUrl
+      ).then(res =>{
+          console.log(res);
+       
+            this.setState({comment:res.data});
+});
   }
   render() {
     return (
       <div className="content">
         <Grid fluid>
           <div className="card">
-            <div className="header">
-              <h4 className="title">Vos Notifications</h4>
-              <h5>Classé selon leur source</h5>
-              
-            </div>
-            <div className="content">
-              <Row>
-                <Col md={3}>
-                 
-                
-                  <h3>Articles Rédacteur</h3>
-                  {this.state.article.reverse().map(article => {
+           
+              <Tabs>
+                <TabList>
+                  <Tab>Articles Redacteur</Tab>
+                  <Tab>Agent de santé</Tab>
+                  <Tab>Vidéos utilisateur</Tab>
+                  <Tab>Commentaires</Tab>
+                  <Tab>Veille</Tab>
+                </TabList>
+                <TabPanel>
+                <Col md={8}>
+                {this.state.article.reverse().map(article => {
                    if (article.vu==0){
                   return <Alert>
                    
@@ -59,14 +80,11 @@ class ModerateurNotifications extends Component {
                    </Alert>
                      }})
                     }
-                 
-                
-                 
-                </Col>
-                <Col md={3}>
-                
-                  <h3>Agent de santé</h3>
-                  {this.state.zone.reverse().map(zone => {
+                     </Col>
+                </TabPanel>
+                <TabPanel>
+                <Col md={8}>
+                {this.state.zone.reverse().map(zone => {
                    if (zone.vu==0){
                   return <Alert bsStyle="danger">
                    
@@ -76,12 +94,11 @@ class ModerateurNotifications extends Component {
                    </Alert>
                      }})
                     }
-                             
-                  
-                </Col>
-                <Col md={3}>
-                  <h3>Vidéo utilisateur</h3>
-                  {this.state.video.reverse().map(video => {
+                    </Col>       
+                </TabPanel>
+                <TabPanel>
+                <Col md={8}>
+                {this.state.video.reverse().map(video => {
                    if (video.vu==0){
                   return <Alert bsStyle="success">
                    
@@ -91,37 +108,74 @@ class ModerateurNotifications extends Component {
                    </Alert>
                      }})
                     }
-                 
-                 
-              
-                 
-                </Col>
-                <Col md={3}>
-                  <h5>Veille</h5>
-                 
-                  
-                  <Alert bsStyle="warning">
-                    <button type="button" aria-hidden="true" className="close">
-                      &#x2715;
-                    </button>
+                    </Col>
+                </TabPanel>
+                <TabPanel>
+                <Col md={8}>
+                {this.state.comment.reverse().map(comment => {
+                   if (comment.supprime==0){
+                     return <Alert bsStyle="warning">
+                
                     <span>
-                      Nouvelle publication Facebook 
+                      Nouveau commentaire :N°{comment.id}
                     </span>
                   </Alert>
+                 }})
+                 }
+                  </Col>
+                </TabPanel>
                
-                  
-                  
-                </Col>
-              </Row>
-              <br />
-              <br />
-              <div className="places-buttons">
+                <TabPanel>
+                <Tabs>
+                <TabList>
+                 <Tab>Google Veille</Tab>
+                  <Tab>Youtube veille</Tab>
+                  <Tab>Tweeter Veille</Tab>
+                </TabList>
+                  <TabPanel>
+                <Col md={8}>
+                {this.state.google.reverse().map(google => {
+                   if (google.supprime==0){
+                     return <Alert bsStyle="warning">
                 
+                    <span>
+                      Nouvelle veille google :N°{google.id}
+                    </span>
+                  </Alert>
+                 }})
+                 }
+                 
+                  </Col>
+                  </TabPanel>
+                  <TabPanel>
+                <Col md={8}>
+                <Alert bsStyle="info">
+              
+                    <span>
+                      Nouvelle veille youtube:N°
+                    </span>
+                  </Alert>
+                  </Col>
+                  </TabPanel>
+                  <TabPanel>
+                <Col md={8}>
+                {this.state.tweet.reverse().map(tweet => {
+                   if (tweet.supprime==0){
+                     return <Alert bsStyle="success">
+                
+                    <span>
+                      Nouvelle veille tweeter :N°{tweet.id}
+                    </span>
+                  </Alert>
+                 }})
+                 }
+                  </Col>
+                  </TabPanel>
+                  </Tabs>
+                </TabPanel>
                
-                      
-               
-              </div>
-            </div>
+              </Tabs>
+           
           </div>
         </Grid>
       </div>

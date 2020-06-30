@@ -43,20 +43,18 @@ class Header extends Component {
       </div>
     );
     return (
-      <Navbar fluid>
-        <Navbar.Header>
+      <Navbar >
+     <Nav pullLeft  className="flex-row" >
           <Navbar.Brand>
             <a href="#pablo">{this.props.brandText}</a>
+          
           </Navbar.Brand>
+
         
-          
-        </Navbar.Header>
-        <Nav >
-          
-        
-          
+      
         </Nav>
-        
+          
+       
     
       
           

@@ -39,8 +39,7 @@ class Commentaire extends Component {
               <Card
                 title="Les Commentaires des utilisateurs"
               
-                ctTableFullWidth
-                ctTableResponsive
+             
                 content={
                   <Table striped >
 

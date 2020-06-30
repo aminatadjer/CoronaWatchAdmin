@@ -23,5 +23,7 @@ export const apiConfig=
      commentUrl:'http://127.0.0.1:8000/api/comment/',
      //googleRobot
      googleUrl:'http://127.0.0.1:8000/api/robot/google/',
+      //twitterRobot
+      tweetUrl:'http://127.0.0.1:8000/api/robot/tweet/',
 }
 

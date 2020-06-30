@@ -97,10 +97,11 @@ class Redaction extends Component {
                 content={
                   <form>
           <div className="form-group">
-      <input type="titre" className="form-control" placeholder=" titre"  onChange={this.Change}  />
+      <input type="titre" className="form-control" placeholder=" titre"  onChange={this.Change} required  />
     </div>
                     
     <SunEditor 
+    required
         onChange={this.handleChange}
         setOptions={{
             height: 400,

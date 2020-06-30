@@ -7,6 +7,7 @@
     "@material-ui/icons": "^4.9.1",
     "axios": "^0.19.2",
     "bootstrap": "^4.4.1",
+    "chart.js": "^2.9.3",
     "chartist": "0.10.1",
     "file-extension": "^4.0.5",
     "jwt-decode": "^2.2.0",
@@ -24,6 +25,7 @@
     "react-scripts": "^3.4.1",
     "react-select": "^3.0.8",
     "react-select-plus": "^1.0.0-rc.3.patch12",
+    "react-tabs": "^3.1.1",
     "react-toggle": "4.0.2",
     "reactstrap": "^8.4.1",
     "suneditor-react": "^2.8.0"

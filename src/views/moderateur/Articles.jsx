@@ -52,14 +52,13 @@ class TableList extends Component {
  
   List(file_extention,media) {
     if (file_extention=="png" || file_extention=="jpg" ) {
-      return <img src={media} style={{ height :'100%',width:'100%',  textAlign:' center',justifyContent: 'center', alignItems: 'center',position:' relative'}} ></img>
+      return <img src={media} style={{ height :'100%',width:'100%',  textAlign:' center',justifyContent: 'center', alignItems: 'center',position:' relative'}} ></img> ;
 
       ;
     }else{
       if(file_extention=="mp4"){
         return  <ReactPlayer
         width='100%'
-        height ='500px'
         controls='true'
          url={media} />  
       }
@@ -83,26 +82,24 @@ class TableList extends Component {
                   <Card
                     title={"Num" +articles.id + ": "+ articles.titre}
                     category={"Ecrit par hadjer "  }
-                    ctTableFullWidth
-                    ctTableResponsive
+                   
                     content={
-                    <div>
+                    <form>
                         <p
-                          align ="center" style={{ fontSize:'25px'}}
-                            
-                            dangerouslySetInnerHTML={{
+                           align ="center" style={{ fontSize:'25px'}}                           
+                           dangerouslySetInnerHTML={{
                               __html:articles.contenu
                             }}>
                         </p>
 
-                        <p align ="center" >
+                        <p >
                            {this.List(fileExtension(articles.media),articles.media) }
                         </p>
 
                         <div align="center">
                              <Button
                                  onClick={() => this.validateClick(articles.id)}
-                                  style={{ background:'#87CB16', color: 'black' ,position:'relative', float:'center',width:'20%',fontSize:'15px'}}
+                                  style={{ background:'#87CB16', color: 'black' ,position:'relative', float:'center',width:'30%',fontSize:'15px'}}
                                   variant="contained"
                                   color="Green"
                                   startIcon={<CheckCircleIcon />}>
@@ -113,12 +110,12 @@ class TableList extends Component {
                                     onClick={() => this.deleteClick(articles.id)}
                                     variant="contained"
                                     color="secondary"
-                                    style={{ background:'#FF4A55', color: 'black' ,position:'relative', float:'center',width:'20%',fontSize:'15px'}}
+                                    style={{ background:'#FF4A55', color: 'black' ,position:'relative', float:'center',width:'30%',fontSize:'15px'}}
                                     startIcon={<CancelIcon />}>
                                     <strong>  Supprimer</strong>
                               </Button>
                         </div>
-                     </div>
+                     </form>
                       }
                    />
                 </Col>
