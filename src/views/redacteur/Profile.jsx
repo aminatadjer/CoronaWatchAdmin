@@ -102,7 +102,7 @@ class Compte extends Component {
                                   
                                   ]}
                                 />
-                                 <input type="titre" className="form-control" defaultValue={user.email}  onChange={e =>this.change(e)}    name ="email"  />
+                                 <input  required type="titre" className="form-control" defaultValue={user.email}  onChange={e =>this.change(e)}    name ="email"  />
 
                                 <Button bsStyle="info" pullRight fill type="submit"  onClick={() => this.submit(localStorage.getItem('id'),this.state.email)}  >
                                   Sauvegarder
@@ -118,6 +118,7 @@ class Compte extends Component {
                               content={
                                 <form>
                                   <FormInputs
+                                  required
                                   ncols={["col-md-12"]}
                                   properties={[
                                     {
@@ -132,6 +133,7 @@ class Compte extends Component {
                                   
                                   />
                                   <FormInputs
+                                  required
                                   ncols={["col-md-12"]}
                                   properties={[
                                     {
@@ -146,6 +148,7 @@ class Compte extends Component {
                                   
                                   />
                                   <FormInputs
+                                  required
                                   ncols={["col-md-12"]}
                                   properties={[
                                     {

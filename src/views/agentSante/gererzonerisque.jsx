@@ -131,7 +131,7 @@ class Gererzonesrisque extends Component {
                     style={{width: "100%"}}
                     >
                      {this.state.Region.map(region=> {
-                      return  <option value={region.id}>{region.nom}</option>
+                      return  <option  required value={region.id}>{region.nom}</option>
                     })}
                  
                   </NativeSelect>
@@ -144,18 +144,18 @@ class Gererzonesrisque extends Component {
                   
                     <Col md={6}>
                       <h6> Nom</h6>
-                    <input type="titre" className="form-control" placeholder=" Nom du centre"  onChange={e =>this.change(e)}  value={this.state.centre.nom}  name ="nom"  ref="a"/>
+                    <input required type="titre" className="form-control" placeholder=" Nom du centre"  onChange={e =>this.change(e)}  value={this.state.centre.nom}  name ="nom"  ref="a"/>
                     </Col>
                    
                   </Row>
                   <Row>
                     <Col md={6}>
                     <h6> Adresse</h6>
-                    <input type="titre" className="form-control" placeholder="Adresse"  onChange={e =>this.change(e)}  value={this.state.centre.adresse}  name ="adresse" ref="b" />
+                    <input required type="titre" className="form-control" placeholder="Adresse"  onChange={e =>this.change(e)}  value={this.state.centre.adresse}  name ="adresse" ref="b" />
                     </Col>
                     <Col md={6}>
                     <h6> Numéro téléphone</h6>
-                    <input type="titre" className="form-control" placeholder="Numéro de téléphone/fix" onChange={e =>this.change(e)}  value={this.state.centre.numero}  name ="numero"  ref="c"/>
+                    <input required type="titre" className="form-control" placeholder="Numéro de téléphone/fix" onChange={e =>this.change(e)}  value={this.state.centre.numero}  name ="numero"  ref="c"/>
                     </Col>
                    
                   </Row>

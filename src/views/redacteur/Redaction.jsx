@@ -17,10 +17,16 @@ class Redaction extends Component {
 
   state ={
     contenu:"",
-    media:null,
+    media:"",
     titre:"",
     article:[],
     articles:[],
+  }
+  cancelCourse(){
+    this.refs.a.value="";
+    this.refs.b.value="";
+  
+ 
   }
 
   handleChange = (e) => {
@@ -44,6 +50,11 @@ class Redaction extends Component {
       media: e.target.files[0]
     })
   };
+  change = (e) => {
+   
+    this.setState({ [e.target.name]: e.target.value });
+    console.log( e.target.value)
+  }
 
   handleSubmit = (e) => {
     e.preventDefault();
@@ -52,7 +63,7 @@ class Redaction extends Component {
     form_data.append('media', this.state.media);
     form_data.append('contenu', this.state.contenu);
     form_data.append('titre', this.state.titre);
-   
+    this.cancelCourse();
     axios.post(apiConfig.articleUrl, form_data, {
       headers: {
         'content-type': 'multipart/form-data'
@@ -96,13 +107,19 @@ class Redaction extends Component {
                 ctTableResponsive
                 content={
                   <form>
-          <div className="form-group">
-      <input type="titre" className="form-control" placeholder=" titre"  onChange={this.Change} required  />
-    </div>
                     
+                     <Col md={6}>
+                      <h6> Titre</h6>
+                   
+                   
+                    <input  required type="titre" className="form-control" placeholder=" titre" onChange={e =>this.change(e)}  value={this.state.article.titre}  name="titre" ref="a"   />
+                    </Col>
+                <br/>
+                <Col md={12}>   
     <SunEditor 
     required
         onChange={this.handleChange}
+       
         setOptions={{
             height: 400,
             buttonList: [
@@ -126,11 +143,15 @@ showToolbar={true}
 
 
 />
+</Col>
+<br/>
 <p>
 
-            <input type="file"
+            <input 
+             ref="b"
+             type="file"
                    id="media"
-                   accept="file_extension|audio/*|video/*|image/*|media_type" onChange={this.handleImageChange} required/>
+                   accept="file_extension|audio/*|video/*|image/*|media_type" onChange={this.handleImageChange} />
           </p>
                  <Button
                   onClick={this.handleSubmit}

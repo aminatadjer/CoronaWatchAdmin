@@ -235,33 +235,14 @@ class DashboardModerateur extends Component {
    
   }
   render() {
-    var dataSales = {
-      labels: [
-        "01",
-        "02",
-        "03",
-        "04",
-        "05",
-        "06",
-        "07",
-        "08",
-        "09",
-        "10",
-        "11",
-        "12"
-      ],
-      series: [
-        [2, 10, 14, 26, 60, 100, 120,57,2,32,23,3],
-        [0, 1, 3, 4, 7, 10, 11, 10,7,29,2,23],
-        [1, 5, 7, 8, 14, 20, 31, 120,7,2,33,3]
-      ]
-    };
+   
+    
     var dataPie = {
       labels: [(this.state.countSuspect*100) % this.state.countTotal+"% ",
-      (this.state.countConfirme*100)%this.state.countTotal+"% ", 
+      (this.state.countGuerie*100)%this.state.countTotal+"% ", 
        (this.state.countMort*100)%this.state.countTotal+"%", 
        (this.state.countCritique*100)%this.state.countTotal+"% ", 
-(this.state.countGuerie*100) %this.state.countTotal+"% "],
+(this.state.countConfirme*100) %this.state.countTotal+"% "],
       series: [(this.state.countSuspect*100)%this.state.countTotal,
        (this.state.countGuerie*100)%this.state.countTotal, 
        (this.state.countMort*100)%this.state.countTotal,
@@ -389,15 +370,14 @@ class DashboardModerateur extends Component {
                 statsIcon="fa fa-clock-o"
                 title="Distribution des Cas en Algerie"
                 category={<Row >
-                
-                 <Col md={4}>  <li class="d-flex col-6"><i className="fa fa-circle" style={{ color:'green'}} /> <p>gurie</p></li> </Col>
-                 <Col md={4}> <li class="d-flex col-6"><i className="fa fa-circle" style={{ color:'purple'}} /> <p>critique</p></li> </Col>
-                 <Col md={4}>  <li class="d-flex col-6"><i className="fa fa-circle" style={{ color:'blue'}} /> <p>suspect</p></li></Col>
-                 <Col md={4}>  <li class="d-flex col-6"><i className="fa fa-circle" style={{ color:'red '}} /> <p>confirme</p></li></Col>
-                 <Col md={4}><li class="d-flex col-6"><i className="fa fa-circle" style={{ color:'orange'}} /> <p>mort</p></li></Col>
+                       <Col md={4}>  <li class="d-flex col-6"><i className="fa fa-circle" style={{ color:'green'}} /> <p>gurie</p></li> </Col>
+                  <Col md={4}> <li class="d-flex col-6"><i className="fa fa-circle" style={{ color:'purple'}} /> <p>critique</p></li> </Col>
+                  <Col md={4}>  <li class="d-flex col-6"><i className="fa fa-circle" style={{ color:'blue'}} /> <p>confirme</p></li></Col>
+                  <Col md={4}>  <li class="d-flex col-6"><i className="fa fa-circle" style={{ color:'red '}} /> <p>mort</p></li></Col>
+                  <Col md={4}><li class="d-flex col-6"><i className="fa fa-circle" style={{ color:'orange'}} /> <p>suspect</p></li></Col>
                 
                 </Row>}
-                stats="Mise a jour il y a 20h"
+                stats="Mise a jour maintenent"
                 content={
                  
               

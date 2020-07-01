@@ -11,6 +11,7 @@ import  axios from "axios";
 import CancelIcon from '@material-ui/icons/Cancel';
 import {apiConfig} from "../ApiConfig.js";
 import BorderColor from '@material-ui/icons/BorderColor';
+import ReactPlayer from 'react-player'
 
 var fileExtension = require('file-extension');
 class TableList extends Component {
@@ -38,9 +39,10 @@ class TableList extends Component {
       ;
     }else{
       if(file_extention=="mp4"){
-        return    <FileViewer 
-        fileType={"mp4"}
-        filePath={media}></FileViewer>
+        return   <ReactPlayer
+        width='100%'
+        controls='true'
+         url={media} />  
       }
     }
    
@@ -55,7 +57,7 @@ class TableList extends Component {
         <Grid fluid>
           <br/>
           <Row>
-          { this.state.articles.map(articles => {   
+          { this.state.articles.reverse().map(articles => {   
           if (articles.valide==0){
           return   <Col md={6}>
               <Card
@@ -65,7 +67,17 @@ class TableList extends Component {
                 content={
                   <div>
                      <p
-                     align ="center" style={{ fontSize:'25px'}}
+                     align ="center" style={{ fontSize:'20px'}}
+                      
+                       dangerouslySetInnerHTML={{
+                         __html:articles.titre
+                       }}
+                      
+                      >
+                            
+                    </p>
+                     <p
+                     align ="left" style={{ fontSize:'15px'}}
                       
                        dangerouslySetInnerHTML={{
                          __html:articles.contenu
@@ -78,14 +90,7 @@ class TableList extends Component {
                     <p align ="center" >
                     {this.List(fileExtension(articles.media),articles.media) }
                   </p>
-                  <Button
-                    style={{ background:'#ff9900', color: 'black' ,position:'relative', left:'0px', top:'2px',width:'180PX',fontSize:'15px'}}
-                    variant="contained"
-                    color="Green"
-                     startIcon={<BorderColor />}
-                  >
-                    <strong>Modifier</strong>
-                  </Button>
+                 
                   </div>
  
                 }

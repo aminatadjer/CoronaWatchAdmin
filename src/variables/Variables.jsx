@@ -617,8 +617,8 @@ var dataPie = {
   series: [60, 8.5, 13, 18.5]
 };
 var legendPie = {
-  names: ["Cas Normal", "Fatalité", "Guérisons", "Cas critique", "Cas que"],
-  types: ["danger", "danger", "warning", "warning","success"]
+  names: ["Cas critique", "Suspect", "cas mort", "confirme", "cas guerie"],
+  types: ["primary", "warning", "danger", "info","success"]
 };
 
 // Data for Line Chart

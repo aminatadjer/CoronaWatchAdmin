@@ -47,6 +47,7 @@ class Compte extends Component {
      
     }).then(res=>{
       this.componentDidMount();
+      this.cancelCourse();
       console.log(res)
     }) ;
     
@@ -102,7 +103,7 @@ class Compte extends Component {
                                   
                                   ]}
                                 />
-                                 <input type="titre" className="form-control" defaultValue={user.email}  onChange={e =>this.change(e)}    name ="email"  />
+                                 <input required type="titre" className="form-control" defaultValue={user.email}  onChange={e =>this.change(e)}    name ="email"  />
 
                                 <Button bsStyle="info" pullRight fill type="submit"  onClick={() => this.submit(localStorage.getItem('id'),this.state.email)}  >
                                   Sauvegarder
