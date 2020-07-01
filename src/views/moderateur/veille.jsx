@@ -9,11 +9,13 @@ import {  tdArrayVeilleFacebook,tdArrayVeilleWeb,tdArrayVeilleYoutube } from "va
 import {apiConfig} from "../ApiConfig.js";
 import  axios from "axios";
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import ReactPlayer from 'react-player'
 
 class VeilleModerateur extends Component {
   state ={
     google:[],
     tweet:[],
+    youtube:[],
   };
 
   componentDidMount(){
@@ -23,11 +25,16 @@ class VeilleModerateur extends Component {
         console.log(res);
         this.setState({google:res.data});
       });
-      axios.get(apiConfig.tweetUrl
+    axios.get(apiConfig.tweetUrl
         ).then(res =>{
             console.log(res);
             this.setState({tweet:res.data});
           });
+    axios.get(apiConfig.youtubeUrl
+        ).then(res =>{
+          console.log(res);
+          this.setState({youtube:res.data});
+        });
   }
   googleDeleteClick(id){
  
@@ -62,6 +69,26 @@ class VeilleModerateur extends Component {
   tweetValideClick(id){
  
     axios.put(apiConfig.tweetUrl+`${id}/TweetValider/`,{
+      "valide":1,
+  
+    }).then(res=>{
+      this.componentDidMount();
+      console.log(res)
+    });
+  }
+youtubeDeleteClick(id){
+ 
+    axios.put(apiConfig.youtubeUrl+`${id}/VideoSupprimer/`,{
+      "supprime":1,
+      
+    }).then(res=>{
+      this.componentDidMount();
+      console.log(res)
+    });
+  }
+youtubeValideClick(id){
+ 
+    axios.put(apiConfig.youtubeUrl+`${id}/VideoValider/`,{
       "valide":1,
   
     }).then(res=>{
@@ -186,6 +213,74 @@ class VeilleModerateur extends Component {
                                  </IconButton>
                                    <IconButton 
                                      onClick={() => this.tweetDeleteClick(tweet.id)}
+                                     style={{ background:'#e6e6e6', color: '#ff0000' }}
+                                     aria-label="delete">
+                                     <CancelIcon fontSize="large" />
+                                   </IconButton>
+                                 </td>
+                               </tr>
+                             );
+                           } })}
+                           </tbody>
+                       </Table>
+                     }
+                   />
+                </Col>
+              
+             </Row>
+             </TabPanel>
+             <TabPanel>
+             
+              
+             <Row>
+               <Col md={12}>
+                 <Card
+                     title="Twitter"
+                     category=""
+                     ctTableFullWidth
+                     ctTableResponsive
+                     content={
+                       <Table striped hover>
+                         <thead>
+   
+                           <tr>
+                            
+                             
+                             <th style={{ width :'10% ' }}>titre</th>
+                             <th style={{ width :'25% ' }}>discription</th>
+                             <th style={{ width :'55% ' }}>Url</th>     
+                             <th style={{ width :'10% ' }}>Action</th>
+                           </tr>
+   
+                           </thead>
+                           <tbody>
+   
+                           {this.state.youtube.reverse().map(youtube => {
+                           
+                             if (youtube.valide==0 && youtube.supprime==0 ){
+                              console.log(youtube.url)
+                             return (
+                               
+                               <tr >
+                                 
+                               
+                                
+                                 <td>{youtube.titre}</td>
+                                 <td>{youtube.description}</td>
+                                 <td>  <ReactPlayer
+                                    width='100%'
+                                    controls='true'
+                                    url={"http://www.youtube.com/embed/"+youtube.url} />  </td>
+                                 
+                                 <td>
+                                 <IconButton 
+                                   onClick={() => this.youtubeValideClick(youtube.url )}
+                                   style={{ background:'#e6e6e6', color: '#00b300' }}
+                                   aria-label="valide">
+                                   <CheckCircleIcon fontSize="large" />
+                                 </IconButton>
+                                   <IconButton 
+                                     onClick={() => this.youtubeDeleteClick(youtube.url)}
                                      style={{ background:'#e6e6e6', color: '#ff0000' }}
                                      aria-label="delete">
                                      <CancelIcon fontSize="large" />

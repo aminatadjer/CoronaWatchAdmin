@@ -47,7 +47,7 @@ class Compte extends Component {
      
     }).then(res=>{
       this.componentDidMount();
-      this.cancelCourse();
+     
       console.log(res)
     }) ;
     

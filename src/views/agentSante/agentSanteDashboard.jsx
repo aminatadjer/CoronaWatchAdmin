@@ -29,8 +29,12 @@ class AgentSanteDashboard extends Component {
 
     googleVeille:[],
     tweetVeille:[],
+    youtubeVeille:[],
     valGoogle:[],
     valTweet:[],
+    valYoutube:[],
+
+
     region:[],
     mort :[],
     guerie :[],
@@ -153,19 +157,7 @@ class AgentSanteDashboard extends Component {
       }})
       this.setState({countComment:this.state.com.length});     
   }
-  numVeille(){ 
-    this.state.googleVeille.map(googleVeille => {
-      if ((googleVeille.valide==0) && (googleVeille.supprime==0) ){    
-        const list = this.state.valGoogle.push(googleVeille);
-      }})
-    this.state.tweetVeille.map(tweetVeille => {
-        if ((tweetVeille.valide==0) && (tweetVeille.supprime==0 )){    
-          const lis = this.state.valTweet.push(tweetVeille);
-      }})
-      
-    //  this.setState({countVeille:+this.state.valGoogle.length});  
-      this.setState({countVeille:+this.state.valTweet.length+this.state.valGoogle.length});  
-  }
+
   componentDidMount(){
    
       axios.get(apiConfig.CasUrl
@@ -205,19 +197,6 @@ class AgentSanteDashboard extends Component {
          this.setState({comment:res.data});
          this.numComment()
         }); 
-        axios.get(apiConfig.googleUrl
-          ).then(res =>{
-          console.log(res);
-          this.setState({googleVeille:res.data});
-          
-          }); 
-          axios.get(apiConfig.tweetUrl
-            ).then(res =>{
-            console.log(res);
-            this.setState({tweetVeille:res.data});
-            this.numVeille()
-          }); 
-    
        
   }
  

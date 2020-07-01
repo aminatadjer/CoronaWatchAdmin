@@ -34,10 +34,11 @@ class DashboardModerateur extends Component {
    
     comment:[],
     com:[],
-
+    youtubeVeille:[],
     googleVeille:[],
     tweetVeille:[],
     valGoogle:[],
+    valYoutube:[],
     valTweet:[],
     region:[],
     mort :[],
@@ -170,9 +171,13 @@ class DashboardModerateur extends Component {
         if ((tweetVeille.valide==0) && (tweetVeille.supprime==0 )){    
           const lis = this.state.valTweet.push(tweetVeille);
       }})
-      
+      this.state.youtubeVeille.map(youtubeVeille => {
+        if ((youtubeVeille.valide==0) && (youtubeVeille.supprime==0 )){    
+          const lis = this.state.valYoutube.push(youtubeVeille);
+      }})
     //  this.setState({countVeille:+this.state.valGoogle.length});  
-      this.setState({countVeille:+this.state.valTweet.length+this.state.valGoogle.length});  
+      this.setState({countVeille:+this.state.valTweet.length+this.state.valGoogle.length+this.state.valYoutube.length}); 
+    //  this.setState({countVeille:+this.state.valGoogle.length});  
   }
   componentDidMount(){
    
@@ -223,10 +228,15 @@ class DashboardModerateur extends Component {
             ).then(res =>{
             console.log(res);
             this.setState({tweetVeille:res.data});
-            this.numVeille()
+           
           }); 
     
-       
+          axios.get(apiConfig.youtubeUrl
+            ).then(res =>{
+            console.log(res);
+            this.setState({youtubeVeille:res.data});
+            this.numVeille()
+          });
   }
  
 

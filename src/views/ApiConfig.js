@@ -25,5 +25,7 @@ export const apiConfig=
      googleUrl:'http://127.0.0.1:8000/api/robot/google/',
       //twitterRobot
       tweetUrl:'http://127.0.0.1:8000/api/robot/tweet/',
+       //youtubeRobot
+       youtubeUrl:'http://127.0.0.1:8000/api/robot/youtube/',
 }
 
