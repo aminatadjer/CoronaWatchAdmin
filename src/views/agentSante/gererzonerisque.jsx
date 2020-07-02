@@ -155,7 +155,7 @@ class Gererzonesrisque extends Component {
                     </Col>
                     <Col md={6}>
                     <h6> Numéro téléphone</h6>
-                    <input required type="titre" className="form-control" placeholder="Numéro de téléphone/fix" onChange={e =>this.change(e)}  value={this.state.centre.numero}  name ="numero"  ref="c"/>
+                    <input pattern="0{1}[5-7]{1}[0-9]{8}" required type="titre" className="form-control" placeholder="Numéro de téléphone/fix" onChange={e =>this.change(e)}  value={this.state.centre.numero}  name ="numero"  ref="c"/>
                     </Col>
                    
                   </Row>

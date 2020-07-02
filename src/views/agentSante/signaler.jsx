@@ -195,25 +195,25 @@ console.log(region.nom)
                   
                     <Col md={4}>
                       <h6> Cas suspects</h6>
-                    <input required type="number" className="form-control" placeholder=" Cas suspects"  onChange={e =>this.change(e)}  value={this.state.Region.suspect}  name ="suspect"  ref="a"/>
+                    <input pattern="[0-9]*" required type="number" className="form-control" placeholder=" Cas suspects"  onChange={e =>this.change(e)}  value={this.state.Region.suspect}  name ="suspect"  ref="a"/>
                     </Col>
                     <Col md={4}>
                     <h6> Cas confirmés</h6>
-                    <input required type="number"  className="form-control"  placeholder="Cas confirmés " onChange={e =>this.change(e)}  value={this.state.Region.confirme}  name ="confirme" ref="b"  />
+                    <input pattern="[0-9]*" required type="number"  className="form-control"  placeholder="Cas confirmés " onChange={e =>this.change(e)}  value={this.state.Region.confirme}  name ="confirme" ref="b"  />
                     </Col>
                     <Col md={4}>
                     <h6> Cas  critique</h6>
-                    <input required type="number"  className="form-control"  placeholder="Cas critique " onChange={e =>this.change(e)}  value={this.state.Region.critique}  name ="critique" ref="c"  />
+                    <input pattern="[0-9]*" required type="number"  className="form-control"  placeholder="Cas critique " onChange={e =>this.change(e)}  value={this.state.Region.critique}  name ="critique" ref="c"  />
                     </Col>
                   </Row>
                   <Row>
                     <Col md={6}>
                     <h6> Cas  morts</h6>
-                    <input required type="number" className="form-control" placeholder="Cas morts"  onChange={e =>this.change(e)}  value={this.state.Region.mort}  name ="mort" ref="d" />
+                    <input pattern="[0-9]*" required type="number" className="form-control" placeholder="Cas morts"  onChange={e =>this.change(e)}  value={this.state.Region.mort}  name ="mort" ref="d" />
                     </Col>
                     <Col md={6}>
                     <h6> Cas  guérie</h6>
-                    <input required type="number" className="form-control" placeholder="Cas guérie" onChange={e =>this.change(e)}  value={this.state.Region.guerie}  name ="guerie"  ref="e"/>
+                    <input pattern="[0-9]*" required type="number" className="form-control" placeholder="Cas guérie" onChange={e =>this.change(e)}  value={this.state.Region.guerie}  name ="guerie"  ref="e"/>
                     </Col>
                    
                   </Row>

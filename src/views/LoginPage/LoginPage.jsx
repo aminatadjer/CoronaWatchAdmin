@@ -19,7 +19,7 @@ import GridItem from "components/landinglogin/Grid/GridItem.js";
 import image from "assets/img/bg7.jpg";
 import axiosInstance from '../../services/axiosApi.jsx'
 import jwt_decode from 'jwt-decode';
-
+import { Alert } from 'reactstrap';
 import Footer from "components/landinglogin/Footer/Footer.js";
 const useStyles = makeStyles(styles);
 export default class Login extends Component {
@@ -27,8 +27,15 @@ export default class Login extends Component {
     state={
       username: '',
       password: '',
-      user : {}
+      user : {},
+      visible : false
     };
+
+    toggle (){
+      this.setState({
+        visible : ! this.state.visible
+      });
+    }
    
   
   change(e){
@@ -68,6 +75,9 @@ export default class Login extends Component {
     )
     ).catch((error) => {
       console.log(error);
+      this.setState({
+        visible : true
+      });
     });
   }
     render() {
@@ -108,6 +118,10 @@ export default class Login extends Component {
           <div className="form-group">
               <label>Mot de passe</label>
               <input type="password" className="form-control" placeholder="Mot de passe" name='password' onChange={e =>this.change(e)} value={this.state.password} />
+              <br/>
+              <Alert color = "danger" isOpen={this.state.visible} toggle={this.toggle.bind(this)}> 
+              Veuillez inserer le bon <strong>mot de passe</strong> 
+              </Alert>
           </div>
           </CardBody>
          
