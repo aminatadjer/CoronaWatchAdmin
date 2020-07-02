@@ -45,100 +45,25 @@ class Header extends Component {
   };
   componentDidMount(){
    
-    axios.get(apiConfig.CasUrl
-                  ).then(res =>{
-            console.log(res);
-            this.setState({casSignaler:res.data});
-            
-            
-          }); 
-      axios.get(apiConfig.infoRegionUrl
-              ).then(res =>{
-        console.log(res);
-        this.setState({zone:res.data});
-        
-      }); 
-      axios.get(apiConfig.regionUrl
-        ).then(res =>{
-        console.log(res);
-        this.setState({region:res.data});
-      }); 
-      axios.get(apiConfig.videoUrl
-            ).then(res =>{
-              console.log(res);
-              this.setState({video:res.data});
-            
-          }); 
+  
       axios.get(apiConfig.articleUrl
         ).then(res =>{
          console.log(res);
          this.setState({articles:res.data});
-        
+        this.numArticle()
      }); 
-     axios.get(apiConfig.commentUrl
-      ).then(res =>{
-       console.log(res);
-       this.setState({comment:res.data});
-      
-      }); 
-     
-  
-        axios.get(apiConfig.robotUrl
-          ).then(res =>{
-          console.log(res);
-          this.setState({robotVeille:res.data});
-          this.numArticle()
-        });
-       
+    
 }
   numArticle(){
     this.state.articles.map(articles => {
       console.log(articles.vu)
-      if (articles.vu==0){
+      if (articles.valide==1 || articles.valide==1 ){
       const list = this.state.art.push(this.state.articles);
-      console.log("hi"+articles.vu)
+     
       }})
       this.setState({countTotal:this.state.countTotal+this.state.art.length}); 
    
-      this.state.zone.map(zone => {
-      if (zone.vu==0){
-      const list = this.state.zo.push(this.state.zone);
-      }})
-      this.setState({countTotal:this.state.countTotal+this.state.zo.length}); 
-    
- 
-      this.state.video.map(video => {
-      if (video.vu==0){
-      const list = this.state.vid.push(video);
-      }})
-      this.setState({countTotal:this.state.countTotal+this.state.vid.length});  
-    
-  
-    this.state.casSignaler.map(casSignaler => {
-      const lis = this.state.dataSales.push(casSignaler.date);
      
-      if (casSignaler.vu==0){    
-        const list = this.state.cas.push(casSignaler);
-      }})
-      console.log( "this.state.dataSales")
-      console.log( this.state.dataSales)
-      this.setState({countTotal:this.state.countTotal+this.state.cas.length});     
-
-    this.state.comment.map(comment => {
-      if (comment.supprime==0){    
-        const list = this.state.com.push(comment);
-      }})
-      this.setState({countTotal:this.state.countTotal+this.state.com.length});     
-  
-    
-      this.state.robotVeille.map(robotVeille => {
-        if ((robotVeille.valide==0) && (robotVeille.supprime==0 )){    
-          const lis = this.state.valRobot.push(robotVeille);
-      }})
-    //  this.setState({countVeille:+this.state.valGoogle.length});  
-      this.setState({countTotal:this.state.countTotal+this.state.valRobot.length}); 
-    //  this.setState({countVeille:+this.state.valGoogle.length});  
-    console.log(this.countTotal)
   }
   logout(e) {
     e.preventDefault();
@@ -198,19 +123,7 @@ class Header extends Component {
         
 
         </Nav>
-       
-   
-          
-       
-    
 
-    
-    
-    
-  
-       
-    
-      
           
         <Nav pullRight className="flex-row">
           

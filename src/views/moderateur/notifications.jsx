@@ -10,8 +10,8 @@ class ModerateurNotifications extends Component {
     video:[],
     article:[],
     zone:[],
-   tweet:[],
-    google:[],
+   robot:[],
+ 
     comment:[],
   
   };
@@ -35,18 +35,13 @@ class ModerateurNotifications extends Component {
          
                 this.setState({zone:res.data});
               });
-    axios.get(apiConfig.googleUrl
+    axios.get(apiConfig.robotUrl
             ).then(res =>{
                 console.log(res);
              
-                  this.setState({google:res.data});
+                  this.setState({robot:res.data});
           });
-    axios.get(apiConfig.tweetUrl
-            ).then(res =>{
-                console.log(res);
-             
-                  this.setState({tweet:res.data});
-    });
+ 
     axios.get(apiConfig.commentUrl
       ).then(res =>{
           console.log(res);
@@ -134,8 +129,8 @@ class ModerateurNotifications extends Component {
                 </TabList>
                   <TabPanel>
                 <Col md={8}>
-                {this.state.google.reverse().map(google => {
-                   if (google.supprime==0){
+                {this.state.robot.reverse().map(google => {
+                   if (google.supprime==0 && google.type=="google"){
                      return <Alert bsStyle="warning">
                 
                     <span>
@@ -149,18 +144,22 @@ class ModerateurNotifications extends Component {
                   </TabPanel>
                   <TabPanel>
                 <Col md={8}>
-                <Alert bsStyle="info">
-              
+                {this.state.robot.reverse().map(youtube => {
+                   if (youtube.supprime==0 && youtube.type=="youtube"){
+                     return <Alert bsStyle="danger">
+                
                     <span>
-                      Nouvelle veille youtube:N°
+                      Nouvelle veille youtube:N° {youtube.id}
                     </span>
                   </Alert>
+                    }})
+                  }
                   </Col>
                   </TabPanel>
                   <TabPanel>
                 <Col md={8}>
-                {this.state.tweet.reverse().map(tweet => {
-                   if (tweet.supprime==0){
+                {this.state.robot.reverse().map(tweet => {
+                   if (tweet.supprime==0 && tweet.type=="twitter"){
                      return <Alert bsStyle="success">
                 
                     <span>

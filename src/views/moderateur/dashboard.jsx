@@ -34,12 +34,11 @@ class DashboardModerateur extends Component {
    
     comment:[],
     com:[],
-    youtubeVeille:[],
-    googleVeille:[],
-    tweetVeille:[],
-    valGoogle:[],
-    valYoutube:[],
-    valTweet:[],
+    robotVeille:[],
+   
+    valRobot:[],
+   
+
     region:[],
     mort :[],
     guerie :[],
@@ -163,20 +162,13 @@ class DashboardModerateur extends Component {
       this.setState({countComment:this.state.com.length});     
   }
   numVeille(){ 
-    this.state.googleVeille.map(googleVeille => {
-      if ((googleVeille.valide==0) && (googleVeille.supprime==0) ){    
-        const list = this.state.valGoogle.push(googleVeille);
+    this.state.robotVeille.map(Veille => {
+      if ((Veille.valide==0) && (Veille.supprime==0) ){    
+        const list = this.state.valRobot.push(Veille);
       }})
-    this.state.tweetVeille.map(tweetVeille => {
-        if ((tweetVeille.valide==0) && (tweetVeille.supprime==0 )){    
-          const lis = this.state.valTweet.push(tweetVeille);
-      }})
-      this.state.youtubeVeille.map(youtubeVeille => {
-        if ((youtubeVeille.valide==0) && (youtubeVeille.supprime==0 )){    
-          const lis = this.state.valYoutube.push(youtubeVeille);
-      }})
-    //  this.setState({countVeille:+this.state.valGoogle.length});  
-      this.setState({countVeille:+this.state.valTweet.length+this.state.valGoogle.length+this.state.valYoutube.length}); 
+   
+      console.log("this.state.valRobot.length");  
+      this.setState({countVeille:this.state.countVeille+this.state.valRobot.length}); 
     //  this.setState({countVeille:+this.state.valGoogle.length});  
   }
   componentDidMount(){
@@ -218,25 +210,14 @@ class DashboardModerateur extends Component {
          this.setState({comment:res.data});
          this.numComment()
         }); 
-        axios.get(apiConfig.googleUrl
+        axios.get(apiConfig.robotUrl
           ).then(res =>{
           console.log(res);
-          this.setState({googleVeille:res.data});
-          
+          this.setState({robotVeille:res.data});
+          this.numVeille()
+        
           }); 
-          axios.get(apiConfig.tweetUrl
-            ).then(res =>{
-            console.log(res);
-            this.setState({tweetVeille:res.data});
-           
-          }); 
-    
-          axios.get(apiConfig.youtubeUrl
-            ).then(res =>{
-            console.log(res);
-            this.setState({youtubeVeille:res.data});
-            this.numVeille()
-          });
+         
   }
  
 

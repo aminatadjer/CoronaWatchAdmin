@@ -13,32 +13,22 @@ import ReactPlayer from 'react-player'
 
 class VeilleModerateur extends Component {
   state ={
-    google:[],
-    tweet:[],
-    youtube:[],
+    robot:[],
+
   };
 
   componentDidMount(){
 
-    axios.get(apiConfig.googleUrl
+    axios.get(apiConfig.robotUrl
     ).then(res =>{
         console.log(res);
-        this.setState({google:res.data});
+        this.setState({robot:res.data});
       });
-    axios.get(apiConfig.tweetUrl
-        ).then(res =>{
-            console.log(res);
-            this.setState({tweet:res.data});
-          });
-    axios.get(apiConfig.youtubeUrl
-        ).then(res =>{
-          console.log(res);
-          this.setState({youtube:res.data});
-        });
+  
   }
-  googleDeleteClick(id){
+DeleteClick(id){
  
-    axios.put(apiConfig.googleUrl+`${id}/googleSupprimer/`,{
+    axios.put(apiConfig.robotUrl+`${id}/Supprimer/`,{
       "supprime":1,
       
     }).then(res=>{
@@ -46,9 +36,9 @@ class VeilleModerateur extends Component {
       console.log(res)
     });
   }
-  googleValideClick(id){
+ ValideClick(id){
  
-    axios.put(apiConfig.googleUrl+`${id}/googleValider/`,{
+    axios.put(apiConfig.robotUrl+`${id}/Valider/`,{
       "valide":1,
   
     }).then(res=>{
@@ -56,46 +46,7 @@ class VeilleModerateur extends Component {
       console.log(res)
     });
   }
-  tweetDeleteClick(id){
- 
-    axios.put(apiConfig.tweetUrl+`${id}/TweetSupprimer/`,{
-      "supprime":1,
-      
-    }).then(res=>{
-      this.componentDidMount();
-      console.log(res)
-    });
-  }
-  tweetValideClick(id){
- 
-    axios.put(apiConfig.tweetUrl+`${id}/TweetValider/`,{
-      "valide":1,
   
-    }).then(res=>{
-      this.componentDidMount();
-      console.log(res)
-    });
-  }
-youtubeDeleteClick(id){
- 
-    axios.put(apiConfig.youtubeUrl+`${id}/VideoSupprimer/`,{
-      "supprime":1,
-      
-    }).then(res=>{
-      this.componentDidMount();
-      console.log(res)
-    });
-  }
-youtubeValideClick(id){
- 
-    axios.put(apiConfig.youtubeUrl+`${id}/VideoValider/`,{
-      "valide":1,
-  
-    }).then(res=>{
-      this.componentDidMount();
-      console.log(res)
-    });
-  }
   render() {
     return (
       <div className="content">
@@ -122,35 +73,36 @@ youtubeValideClick(id){
                       <thead>
 
                         <tr>
-                          <th>Id</th>
-                          <th>Titre</th>
-                          <th>Description</th>
-                          <th>URL</th>                         
-                          <th>Action</th>
+                          
+                          <th style={{ width :'10% ' }}>Date</th>  
+                          <th style={{ width :'15% ' }}>Titre</th>
+                          <th style={{ width :'50% ' }}>Description</th>
+                          <th style={{ width :'15% ' }}>URL</th>                         
+                          <th v>Action</th>
                         </tr>
 
                         </thead>
                         <tbody>
 
-                        {this.state.google.reverse().map(google => {
-                          if (google.valide==0 && google.supprime==0 ){
+                        {this.state.robot.reverse().map(google => {
+                          if (google.valide==0 && google.supprime==0  && google.type=="google"){
                           return (
                             <tr >
-                              
-                              <td>{google.id}</td>
-                              <td>{google.titre}</td>
-                              <td>{google.description}</td>
-                              <td><a href={google.url}>{google.url}</a></td>
+                           
+                              <td style={{ width :'10% ' }}>{google.date}</td>
+                              <td style={{ width :'15% ' }}>{google.titre}</td>
+                              <td style={{ width :'50% ' }}>{google.description}</td>
+                              <td style={{ width :'15% ' }}><a href={google.url}>{google.url}</a></td>
                               
                               <td>
                               <IconButton 
-                                onClick={() => this.googleValideClick(google.id )}
+                                onClick={() => this.ValideClick(google.id )}
                                 style={{ background:'#e6e6e6', color: '#00b300' }}
                                 aria-label="valide">
                                 <CheckCircleIcon fontSize="large" />
                               </IconButton>
                                 <IconButton 
-                                  onClick={() => this.googleDeleteClick(google.id)}
+                                  onClick={() => this.DeleteClick(google.id)}
                                   style={{ background:'#e6e6e6', color: '#ff0000' }}
                                   aria-label="delete">
                                   <CancelIcon fontSize="large" />
@@ -175,17 +127,17 @@ youtubeValideClick(id){
                  <Card
                      title="Twitter"
                      category=""
-                     ctTableFullWidth
-                     ctTableResponsive
+                 
                      content={
                        <Table striped hover>
                          <thead>
    
                            <tr>
-                             <th>Id</th>
-                             <th>Date</th>  
-                             <th>Auteur</th>
-                             <th>Contenu</th>
+                           
+                             <th style={{ width :'8% ' }}>Date</th>  
+                             <th style={{ width :'15% ' }}>Titre</th>
+                             <th style={{ width :'50% ' }}>Description</th>
+                             <th style={{ width :'15% ' }}>Url</th>
                                                   
                              <th>Action</th>
                            </tr>
@@ -193,26 +145,26 @@ youtubeValideClick(id){
                            </thead>
                            <tbody>
    
-                           {this.state.tweet.reverse().map(tweet => {
-                             if (tweet.valide==0 && tweet.supprime==0 ){
+                           {this.state.robot.reverse().map(tweet => {
+                             if (tweet.valide==0 && tweet.supprime==0 && tweet.type=="twitter"){
                              return (
                                <tr >
                                  
-                                 <td>{tweet.id}</td>
+                               
                                  <td>{tweet.date}</td>
-                                 <td>{tweet.proprio}</td>
-                                 <td>{tweet.content}</td>
-                             
+                                 <td>{tweet.titre}</td>
+                                 <td>{tweet.description}</td>
+                                 <td><a href={tweet.url}>{tweet.url}</a></td>
                                  
                                  <td>
                                  <IconButton 
-                                   onClick={() => this.tweetValideClick(tweet.id )}
+                                   onClick={() => this.ValideClick(tweet.id )}
                                    style={{ background:'#e6e6e6', color: '#00b300' }}
                                    aria-label="valide">
                                    <CheckCircleIcon fontSize="large" />
                                  </IconButton>
                                    <IconButton 
-                                     onClick={() => this.tweetDeleteClick(tweet.id)}
+                                     onClick={() => this.DeleteClick(tweet.id)}
                                      style={{ background:'#e6e6e6', color: '#ff0000' }}
                                      aria-label="delete">
                                      <CancelIcon fontSize="large" />
@@ -235,7 +187,7 @@ youtubeValideClick(id){
              <Row>
                <Col md={12}>
                  <Card
-                     title="Twitter"
+                     title="Youtube"
                      category=""
                      ctTableFullWidth
                      ctTableResponsive
@@ -245,20 +197,20 @@ youtubeValideClick(id){
    
                            <tr>
                             
-                             
-                             <th style={{ width :'10% ' }}>titre</th>
-                             <th style={{ width :'25% ' }}>discription</th>
-                             <th style={{ width :'55% ' }}>Url</th>     
+                        
+                             <th style={{ width :'10% ' }}>Titre</th>
+                             <th style={{ width :'25% ' }}>Discription</th>
+                             <th style={{ width :'53% ' }}>Url</th>     
                              <th style={{ width :'10% ' }}>Action</th>
                            </tr>
    
                            </thead>
                            <tbody>
    
-                           {this.state.youtube.reverse().map(youtube => {
+                           {this.state.robot.reverse().map(youtube => {
                            
-                             if (youtube.valide==0 && youtube.supprime==0 ){
-                              console.log(youtube.url)
+                             if (youtube.valide==0 && youtube.supprime==0 && youtube.type=="youtube" ){
+                             
                              return (
                                
                                <tr >
@@ -270,17 +222,17 @@ youtubeValideClick(id){
                                  <td>  <ReactPlayer
                                     width='100%'
                                     controls='true'
-                                    url={"http://www.youtube.com/embed/"+youtube.url} />  </td>
+                                    url={"https://www.youtube.com/embed/"+youtube.url }/>  </td>
                                  
                                  <td>
                                  <IconButton 
-                                   onClick={() => this.youtubeValideClick(youtube.url )}
+                                   onClick={() => this.ValideClick(youtube.id )}
                                    style={{ background:'#e6e6e6', color: '#00b300' }}
                                    aria-label="valide">
                                    <CheckCircleIcon fontSize="large" />
                                  </IconButton>
                                    <IconButton 
-                                     onClick={() => this.youtubeDeleteClick(youtube.url)}
+                                     onClick={() => this.DeleteClick(youtube.id)}
                                      style={{ background:'#e6e6e6', color: '#ff0000' }}
                                      aria-label="delete">
                                      <CancelIcon fontSize="large" />
