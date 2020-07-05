@@ -1,6 +1,8 @@
 //Agent de sante sidebar routes
 
 import Compte from "views/agentSante/compte.jsx";
+import history from "views/agentSante/history.jsx";
+
 
 import SignalerCas from "views/agentSante/signaler.jsx";
 import Gererzonesrisque from "views/agentSante/gererzonerisque.jsx";
@@ -42,6 +44,13 @@ const dashboardRoutesagent = [
     name: "Mon Compte",
     icon: "pe-7s-user",
     component: Compte,
+    layout: "/agentsante"
+  },
+  {
+    path: "/history",
+    name: "Historique",
+    icon: "pe-7s-clock",
+    component: history,
     layout: "/agentsante"
   },
   {

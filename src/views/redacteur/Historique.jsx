@@ -54,102 +54,68 @@ class TableList extends Component {
   
     return (
      
+      <div className="content">
         <Grid fluid>
-          <br/>
           <Row>
-          { this.state.articles.reverse().map(articles => {   
-  if (articles.valide==1){
-    return   <Col md={6}>
-        <Card
-          title={"   Etat :Valide"}
-         
-          
-          content={
-            <div>
-              
 
-               <p
-               align ="center" style={{ fontSize:'20px'}}
-                
-                 dangerouslySetInnerHTML={{
-                   __html:articles.titre
-                 }}
-                
-                >
-                      
-              </p>
-               <p
-               align ="left" style={{ fontSize:'15px'}}
-                
-                 dangerouslySetInnerHTML={{
-                   __html:articles.contenu
-                 }}
-                
-                >
-                      
-              </p>
-              <hr/>
-              <p align ="center" >
-              {this.List(fileExtension(articles.media),articles.media) }
-            </p>
-           
-            </div>
+          <Col md={12 }>
+          <Table striped hover>
+                      <thead>                         
+                        <tr>
+                        
+                        <th>id</th>                       
+                        <th>titre</th>
+                        <th>contenu</th>
+                        <th>media</th>
+                        <th>état</th>
 
-          }
-          
-          />
-          
-        </Col>
-   
-            }
-       
-          if (articles.valide==0){
-          return<Col md={6}>
-              <Card
-                title={"   Etat : Non valide"}
-               
-                
-                content={
-                  <div>
+                       
+                      </tr>
                     
+                      </thead>
+                      <tbody>
+                        
+                      {this.state.articles.map(article => {
+                        
+                        if (article.supprime==1 ){
+                          return (
+                            <tr >
 
-                     <p
-                     align ="center" style={{ fontSize:'20px'}}
-                      
-                       dangerouslySetInnerHTML={{
-                         __html:articles.titre
-                       }}
-                      
-                      >
-                            
-                    </p>
-                     <p
-                     align ="left" style={{ fontSize:'15px'}}
-                      
-                       dangerouslySetInnerHTML={{
-                         __html:articles.contenu
-                       }}
-                      
-                      >
-                            
-                    </p>
-                    <hr/>
-                    <p align ="center" >
-                    {this.List(fileExtension(articles.media),articles.media) }
-                  </p>
-                 
-                  </div>
- 
-                }
-                
-                />
-                
-              </Col>
-         
-                  }
-                })}
-            </Row>
-          </Grid>
+                              <td>{article.id}</td>
+                            <td>{article.titre}</td>
+                            <td>{article.contenu}</td>
+                            <td>{article.media}</td>
+                           
+                            <td><i class="fa fa-close  fa-2x" aria-hidden="true" style={{ color :'red ' }}></i></td>
+
+                          </tr>
+                          );}
+                        })}
+                             
+                      {this.state.articles.map(article => {
+                        
+                        if (article.valide==1 ){
+                          return (
+                            <tr >
+
+                              <td>{article.id}</td>
+                            <td>{article.titre}</td>
+                            <td>{article.contenu}</td>
+                            <td>{article.media}</td>
+                           
+                            <td><i class="fa fa-check  fa-2x" aria-hidden="true" style={{ color :'green ' }}></i></td>
+
+                          </tr>
+                          );}
+                        })}
+                      </tbody>
+                    </Table>
+               
+          </Col>
+        </Row>
+        
+        </Grid>
+      </div>
        
   
     )

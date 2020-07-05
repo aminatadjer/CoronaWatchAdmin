@@ -7,6 +7,7 @@ import CompteModerateur from "views/moderateur/compte.jsx";
 import ModerateurNotifications from "views/moderateur/notifications.jsx";
 import VeilleModerateur from "views/moderateur/veille.jsx"
 import DashboardModerateur from "views/moderateur/dashboard.jsx"
+import ModerateurHistory from "views/moderateur/history.jsx"
 import Articles from "views/moderateur/Articles.jsx";
 import Commentaire from "views/moderateur/Commentaire";  
 import Videos from "views/moderateur/Videos";  
@@ -51,13 +52,7 @@ const dashboardRoutes = [
     component: EvolutionCasModerateur,
     layout: "/moderateur"
   },
-  {
-    path: "/zonerisque",
-    name: "Zone à risques",
-    icon: "pe-7s-map-marker",
-    component: ZonesRisqueModerateur,
-    layout: "/moderateur"
-  },
+
   
   
 
@@ -84,12 +79,22 @@ const dashboardRoutes = [
     layout: "/moderateur"
   },
   {
+    path: "/historique",
+    name: "Historique",
+    icon: "pe-7s-clock",
+    component: ModerateurHistory,
+    layout: "/moderateur"
+  },
+  {
     path: "/notifications",
     name: "Notifications",
     icon: "pe-7s-bell",
     component: ModerateurNotifications,
     layout: "/moderateur"
   },
+
+ 
+ 
  
  
  

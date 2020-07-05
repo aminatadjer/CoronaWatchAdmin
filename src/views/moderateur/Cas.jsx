@@ -48,7 +48,7 @@ class Cas extends Component {
   validateClick(id){
  
     axios.put(apiConfig.CasUrl+`${id}/CasSignalerValider/`,{
-      "supprime":1,
+      "valide":1,
       "vu":1,
     },{headers:{
     
