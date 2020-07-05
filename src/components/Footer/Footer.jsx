@@ -21,7 +21,7 @@ import { Grid } from "react-bootstrap";
 class Footer extends Component {
   render() {
     return (
-      <footer className="footer">
+      <footer  className="footer fixed-bottom ">
         <Grid fluid>
           <nav className="pull-left">
             <ul>

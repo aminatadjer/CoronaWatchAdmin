@@ -30,6 +30,8 @@ import Select from 'react-select';
 import NativeSelect from '@material-ui/core/NativeSelect';
 import axios from "axios";
 import {apiConfig} from "../ApiConfig.js"
+const token=localStorage.getItem("base-token");
+
 class SignalerCas extends Component {
   constructor(props){
     super(props);
@@ -230,7 +232,7 @@ console.log(region.nom)
             
           </Row>
           <Row>
-            <Col md={6}>
+            <Col md={12}>
             <Card
                 title="Cas des coronavirus par region "
                 category="-Mise a jour et valider par le modérateur-"
@@ -281,7 +283,9 @@ console.log(region.nom)
               />
 
             </Col>
-            <Col md={6}>
+            </Row>
+            <Row>
+            <Col md={12}>
             <Card
                 title="Cas des coronavirus par region "
                 category="-Mise a jour non valider par le modérateur-"

@@ -112,7 +112,7 @@ render() {
               </GridItem>
           </GridContainer>
             </div>
-            <Footer whiteFont /> 
+            <Footer class="fixed-bottom" whiteFont /> 
             </div>
             </div>
         );

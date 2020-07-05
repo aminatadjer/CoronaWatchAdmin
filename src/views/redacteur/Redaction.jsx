@@ -13,6 +13,8 @@ import SunEditor,{buttonList} from "suneditor-react";
 import Editor from "components/Editor/Editor";
 import {apiConfig} from "../ApiConfig.js";
 var fileExtension = require('file-extension');
+const token=localStorage.getItem("base-token");
+
 class Redaction extends Component {
 
   state ={
@@ -30,15 +32,14 @@ class Redaction extends Component {
   }
 
   handleChange = (e) => {
-    console.log(this.state.contenu)
+
  
     this.setState({
       contenu: e
     })
   };
   Change = (e) => {
-  console.log("helo")
-    console.log(this.state.titre)
+ 
  
     this.setState({
       titre: e
@@ -64,11 +65,7 @@ class Redaction extends Component {
     form_data.append('contenu', this.state.contenu);
     form_data.append('titre', this.state.titre);
     this.cancelCourse();
-    axios.post(apiConfig.articleUrl, form_data, {
-      headers: {
-        'content-type': 'multipart/form-data'
-      }
-    })
+    axios.post(apiConfig.articleUrl, form_data)
         .then(res => {
           console.log(res.data);
           this.componentDidMount();

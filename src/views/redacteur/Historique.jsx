@@ -58,14 +58,61 @@ class TableList extends Component {
           <br/>
           <Row>
           { this.state.articles.reverse().map(articles => {   
+  if (articles.valide==1){
+    return   <Col md={6}>
+        <Card
+          title={"   Etat :Valide"}
+         
+          
+          content={
+            <div>
+              
+
+               <p
+               align ="center" style={{ fontSize:'20px'}}
+                
+                 dangerouslySetInnerHTML={{
+                   __html:articles.titre
+                 }}
+                
+                >
+                      
+              </p>
+               <p
+               align ="left" style={{ fontSize:'15px'}}
+                
+                 dangerouslySetInnerHTML={{
+                   __html:articles.contenu
+                 }}
+                
+                >
+                      
+              </p>
+              <hr/>
+              <p align ="center" >
+              {this.List(fileExtension(articles.media),articles.media) }
+            </p>
+           
+            </div>
+
+          }
+          
+          />
+          
+        </Col>
+   
+            }
+       
           if (articles.valide==0){
-          return   <Col md={6}>
+          return<Col md={6}>
               <Card
-                title={"Article N°:" +articles.id}
+                title={"   Etat : Non valide"}
                
                 
                 content={
                   <div>
+                    
+
                      <p
                      align ="center" style={{ fontSize:'20px'}}
                       

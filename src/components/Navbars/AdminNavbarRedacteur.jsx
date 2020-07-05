@@ -4,8 +4,11 @@ import { Navbar, NavItem, Nav, MenuItem,NavDropdown,Row } from "react-bootstrap"
 import AdminNavbarLinks from "./AdminNavbarLinks.jsx";
 import { NavbarBrand } from "reactstrap";
 import {apiConfig} from "views/ApiConfig.js";
-import dashboard from "views/moderateur/dashboard.jsx";
+
+
+
 import  axios from "axios";
+
 class Header extends Component {
   
   state ={
@@ -57,7 +60,7 @@ class Header extends Component {
   numArticle(){
     this.state.articles.map(articles => {
       console.log(articles.vu)
-      if (articles.valide==1 || articles.valide==1 ){
+      if (articles.valide==1 || articles.supprime==1 ){
       const list = this.state.art.push(this.state.articles);
      
       }})
@@ -69,6 +72,11 @@ class Header extends Component {
     e.preventDefault();
     localStorage.clear();
     this.props.history.push('/index')  
+  }
+  notif(e) {
+    e.preventDefault();
+  console.log("d")
+    this.props.history.push('views/moderateur/notifications.jsx')  
   }
   mobileSidebarToggle(e) {
     if (this.state.sidebarExists === false) {
@@ -114,8 +122,8 @@ class Header extends Component {
             <a href="#pablo">{this.props.brandText}</a>
 
           </Navbar.Brand>
-          <button type="button" class="btn btn-dark ">
-         <a > <i className="fa fa-bell" />
+          <button type="button" class="btn btn-dark "  onClick={() => this.props.history.push('/redacteur/notifications')}>
+         <a  > <i className="fa fa-bell" />
          {console.log(this.state.countTotal)}
     <span class="badge badge-danger" >{this.state.countTotal}</span>
         <span class="sr-only">unread messages</span></a>
@@ -127,7 +135,7 @@ class Header extends Component {
           
         <Nav pullRight className="flex-row">
           
-          <NavItem eventKey={1} href="#">
+          <NavItem eventKey={1} onClick={() => this.props.history.push('/redacteur/user')}>
             Mon Compte
             
           </NavItem> 

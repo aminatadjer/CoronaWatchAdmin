@@ -94,9 +94,9 @@ class Header extends Component {
             <a href="#pablo">{this.props.brandText}</a>
 
           </Navbar.Brand>
-          <button type="button" class="btn btn-dark ">
-         <a > <i className="fa fa-bell" />
-         {console.log(this.state.countTotal)}
+          <button type="button" class="btn btn-dark " onClick={() => this.props.history.push('/agentsante/notifications')}>
+         <a  > <i className="fa fa-bell" />
+     
     <span class="badge badge-danger" >{this.state.countTotal}</span>
         <span class="sr-only">unread messages</span></a>
       </button>
@@ -113,7 +113,7 @@ class Header extends Component {
           
         <Nav pullRight className="flex-row">
           
-          <NavItem eventKey={1} href="#">
+          <NavItem eventKey={1} onClick={() => this.props.history.push('/agentsante/user')}>
             Mon Compte
             
           </NavItem> 

@@ -5,6 +5,7 @@ import { Grid, Row, Col, Table } from "react-bootstrap";
 import Card from "components/Card/Card.jsx";
 import  axios from "axios";
 import {apiConfig} from "../ApiConfig.js"
+const token=localStorage.getItem("base-token");
 
 class ZonesRisqueModerateur extends Component {
   state ={

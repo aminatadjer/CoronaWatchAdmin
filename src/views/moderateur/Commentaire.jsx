@@ -6,6 +6,8 @@ import IconButton from '@material-ui/core/IconButton';
 import CancelIcon from '@material-ui/icons/Cancel';
 import  axios from "axios";
 import {apiConfig} from "../ApiConfig.js";
+const token=localStorage.getItem("base-token");
+
 class Commentaire extends Component {
   state ={
     comment:[],
@@ -24,7 +26,10 @@ class Commentaire extends Component {
     axios.put(apiConfig.commentUrl+`${id}/CommentSupprimer/`,{
       
       "supprime":1,
-    }).then(res=>{
+    },{headers:{
+    
+      'Authorization':'Token '+token
+    }}).then(res=>{
       this.componentDidMount();
       console.log(res)
     });
@@ -47,7 +52,7 @@ class Commentaire extends Component {
 
                           <th>id</th>
                           <th align ="center">Commentaire</th>
-                          <th>Supprimer</th>
+                          <th>Action</th>
 
                         </thead>
                         

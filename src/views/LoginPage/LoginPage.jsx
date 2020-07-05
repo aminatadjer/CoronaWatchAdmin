@@ -58,6 +58,14 @@ export default class Login extends Component {
   }
   submit(e){
     e.preventDefault();
+    axiosInstance.post('auth/token/login/', {
+      username: this.state.username,
+      password:this.state.password,
+    }
+    ).then(res=>(
+      localStorage.setItem("base-token",res.data.auth_token)
+    ))
+    
     axiosInstance.post('api/token/obtain', {
       username: this.state.username,
       password:this.state.password,

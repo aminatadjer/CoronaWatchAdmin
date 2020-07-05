@@ -11,7 +11,7 @@ import { FormInputs } from "components/FormInputs/FormInputs.jsx";
 import Button from "components/CustomButton/CustomButton.jsx";
 import axios  from "axios";
 import {apiConfig} from "../ApiConfig.js";
-
+const token=localStorage.getItem("base-token");
 
 class CompteModerateur extends Component {
 
@@ -37,7 +37,8 @@ class CompteModerateur extends Component {
   }
 
   submit(id,email){
-    axios.put(apiConfig.userUrl+`${id}/editEmail/`,{
+    console.log("jo")
+    axios.put(apiConfig.userUrl+`${id}/resetEmail/`,{
       "email":email,
     }).then(res=>{
       this.componentDidMount();
@@ -108,6 +109,7 @@ class CompteModerateur extends Component {
 
                                     <input 
                                           type="titre"
+                                          placeholder= "email"
                                           className="form-control" 
                                           defaultValue={user.email} 
                                           onChange={e =>this.change(e)}    

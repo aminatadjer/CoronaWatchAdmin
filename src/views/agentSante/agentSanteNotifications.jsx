@@ -38,9 +38,7 @@ class AgentSanteNotifications extends Component {
                   {this.state.region.reverse().map(region => {
                    if (region.valide==1){
                   return <Alert bsStyle="success">
-                    <button type="button" aria-hidden="true" className="close">
-                      &#x2715;
-                    </button>
+                   
                     <span>
                       <b> Success - </b> Le modérateur a validé la mise a jour des cas N°:{region.id}
                     </span>
@@ -54,9 +52,7 @@ class AgentSanteNotifications extends Component {
                   {this.state.region.reverse().map(region => {
                    if (region.supprime==1){
                  return <Alert bsStyle="warning">
-                    <button type="button" aria-hidden="true" className="close">
-                      &#x2715;
-                    </button>
+                    
                     <span>
                       <b> Warning - </b> Le modérateur a supprimer la mise a jour des cas N°:{region.id}
                     </span>

@@ -14,7 +14,7 @@ import NativeSelect from '@material-ui/core/NativeSelect';
 import axios from "axios";
 import {apiConfig} from "../ApiConfig.js"
 
-
+const token=localStorage.getItem("base-token");
 
 class Gererzonesrisque extends Component {
   constructor(props){
@@ -40,17 +40,20 @@ class Gererzonesrisque extends Component {
  
  
   submit(e){
-    e.preventDefault();
-  
+    e.preventDefault();  
+     const token=localStorage.getItem("base-token");
+     console.log(token)
     axios.post(apiConfig.centreUrl, {
-      nom: this.state.nom,
+      nom: this.state.nom, 
       adresse:this.state.adresse,
       numero: this.state.numero,
       region: this.state.region,
     
       
-    }
-    ).then(res => {
+    },{headers:{
+     
+      'Authorization':'Token '+token
+     }} ).then(res => {
   
       this.cancelCourse();
       this.componentDidMount();
@@ -65,8 +68,12 @@ class Gererzonesrisque extends Component {
 
   componentDidMount(){
 
-   
-      axios.get(apiConfig.regionUrl
+    const token=localStorage.getItem("base-token");
+    console.log(token)
+      axios.get(apiConfig.regionUrl,{headers:{
+     
+        'Authorization':'Token ' + token
+      }}
       ).then(res =>{
           console.log(res);
           this.setState({Region:res.data});
@@ -74,7 +81,10 @@ class Gererzonesrisque extends Component {
         }
     
         );
-        axios.get(apiConfig.centreUrl
+        axios.get(apiConfig.centreUrl,{headers:{
+       
+          'Authorization':'Token ' + token
+        }}
         ).then(res =>{
             console.log(res);
             this.setState({centre:res.data});

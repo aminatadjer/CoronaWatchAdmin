@@ -214,18 +214,21 @@ class AgentSanteDashboard extends Component {
   render() {
     
     var dataPie = {
-      labels: [(this.state.countSuspect*100) % this.state.countTotal+"% ",
-      (this.state.countGuerie*100)%this.state.countTotal+"% ", 
-       (this.state.countMort*100)%this.state.countTotal+"%", 
-       (this.state.countCritique*100)%this.state.countTotal+"% ", 
-(this.state.countConfirme*100) %this.state.countTotal+"% "],
+      labels: [(this.state.countSuspect*100-(this.state.countSuspect*100) % this.state.countTotal)/this.state.countTotal+"% ",
+      (this.state.countMort*100-(this.state.countMort*100) % this.state.countTotal)/this.state.countTotal+"% ", 
+      (this.state.countConfirme*100-(this.state.countConfirme*100) % this.state.countTotal)/this.state.countTotal+"% " , 
 
-
-      series: [(this.state.countSuspect*100)%this.state.countTotal,
-       (this.state.countGuerie*100)%this.state.countTotal, 
-       (this.state.countMort*100)%this.state.countTotal,
-       (this.state.countCritique*100)%this.state.countTotal, 
-       (this.state.countConfirme*100)%this.state.countTotal]
+      (this.state.countCritique*100-(this.state.countCritique*100) % this.state.countTotal)/this.state.countTotal+"% ", 
+    
+      (this.state.countGuerie*100-(this.state.countGuerie*100) % this.state.countTotal)/this.state.countTotal+"% "],
+      
+      series: [(this.state.countSuspect*100-(this.state.countSuspect*100) % this.state.countTotal)/this.state.countTotal,
+        (this.state.countMort*100-(this.state.countMort*100) % this.state.countTotal)/this.state.countTotal,
+        (this.state.countConfirme*100-(this.state.countConfirme*100) % this.state.countTotal)/this.state.countTotal,
+   
+ 
+        (this.state.countCritique*100-(this.state.countCritique*100) % this.state.countTotal)/this.state.countTotal, 
+        (this.state.countGuerie*100-(this.state.countGuerie*100) % this.state.countTotal)/this.state.countTotal ]
     };
     var dataBar = {
       labels: ['suspect', 'confirme', 'critique', 'guerie', 'mort'],
@@ -260,8 +263,8 @@ class AgentSanteDashboard extends Component {
                 statsIcon="fa fa-history"
                 id="chartHours"
                 title="Evolution des cas en Algerie"
-                category="24 Hours performance"
-                stats="Mise a jour il y a 3 minutes"
+            
+                stats=  "les dernieres MAJ par le modérateur"
                 content={
                   <div className="ct-chart">
                      <ChartistGraph
@@ -280,15 +283,14 @@ class AgentSanteDashboard extends Component {
                 statsIcon="fa fa-clock-o"
                 title="Distribution des Cas en Algerie"
                 category={<Row >
-                
-                  <Col md={4}>  <li class="d-flex col-6"><i className="fa fa-circle" style={{ color:'green'}} /> <p>gurie</p></li> </Col>
+                <Col md={4}>  <li class="d-flex col-6"><i className="fa fa-circle" style={{ color:'green'}} /> <p>gurie</p></li> </Col>
                   <Col md={4}> <li class="d-flex col-6"><i className="fa fa-circle" style={{ color:'purple'}} /> <p>critique</p></li> </Col>
-                  <Col md={4}>  <li class="d-flex col-6"><i className="fa fa-circle" style={{ color:'blue'}} /> <p>confirme</p></li></Col>
+                  <Col md={4}>  <li class="d-flex col-6"><i className="fa fa-circle" style={{ color:'blue'}} /> <p>suspect</p></li></Col>
                   <Col md={4}>  <li class="d-flex col-6"><i className="fa fa-circle" style={{ color:'red '}} /> <p>mort</p></li></Col>
-                  <Col md={4}><li class="d-flex col-6"><i className="fa fa-circle" style={{ color:'orange'}} /> <p>suspect</p></li></Col>
+                  <Col md={4}><li class="d-flex col-6"><i className="fa fa-circle" style={{ color:'orange'}} /> <p>confirme</p></li></Col>
                  
                  </Row>}
-                stats="Mise a jour il y a 20h"
+                stats= "les dernieres MAJ par le modérateur"
                 content={
                   <div
                     id="chartPreferences"
@@ -311,28 +313,44 @@ class AgentSanteDashboard extends Component {
                 ctTableFullWidth
                 ctTableResponsive
                 content={
+                  <div>
                   <Table striped hover>
                     <thead>
                       <tr>
-                        {thArray.map((prop, key) => {
-                          return <th key={key}>{prop}</th>;
-                        })}
+                      <th>region</th>
+                        <th>cas suspects</th>
+                        <th>cas confirmés</th>
+                        <th>guerisons</th>
+                        <th>cas critiques</th>
+                        <th>cas morts</th>
+                        
                       </tr>
                     </thead>
                     <tbody>
-                      {tdArray.map((prop, key) => {
-                        return (
-                          <tr key={key}>
-                            {prop.map((prop, key) => {
-                              return <td key={key}>{prop}</td>;
-                            })}
-                          </tr>
-                        );
-                      })}
+                      
+                    {this.state.region.map(region => {
+                 
+                 return (
+                   <tr >
+                       <td>{region.nom}</td>
+                     
+                    <td>{region.suspect}</td>
+                    <td>{region.confirme}</td>
+                    <td>{region.guerie}</td>
+                    <td>{region.critique}</td>
+                    <td>{region.mort}</td>
+                   
+                   </tr>
+                 );
+         })}
                     </tbody>
                   </Table>
+                  
+                 </div>
                 }
+                
               />
+
             </Col>
 
              

@@ -12,6 +12,7 @@ import Button from '@material-ui/core/Button';
 import CancelIcon from '@material-ui/icons/Cancel';
 import FileViewer from 'react-file-viewer';  
 import ReactPlayer from 'react-player'
+const token=localStorage.getItem("base-token");
 
 
 
@@ -21,7 +22,8 @@ class Cas extends Component {
 
   state ={
     casSignaler:[],
-    articles:[]
+    articles:[],
+    user:[]
   };
   componentDidMount(){
 
@@ -30,26 +32,42 @@ class Cas extends Component {
         console.log(res);
         this.setState({casSignaler:res.data});
       }); 
+      axios.get(apiConfig.userUrl
+        ).then(res =>{
+            console.log(res);
+       
+            this.setState({user:res.data});
+          }
+      
+          );
   }
  
-  validateClick(id){
-    
-    axios.put(apiConfig.CasUrl +`${id}/CasSignalerValider/`,{
-      "valide":1,
-      "vu":1,
-    }).then(res=>{
-      this.componentDidMount();
-      console.log(res);
-    });
-    
-  }
 
+    
+    
+  validateClick(id){
+ 
+    axios.put(apiConfig.CasUrl+`${id}/CasSignalerValider/`,{
+      "supprime":1,
+      "vu":1,
+    },{headers:{
+    
+      'Authorization':'Token '+token
+    }}).then(res=>{
+      this.componentDidMount();
+      console.log(res)
+    });
+  }
+ 
   deleteClick(id){
  
     axios.put(apiConfig.CasUrl+`${id}/CasSignalerSupprimer/`,{
       "supprime":1,
       "vu":1,
-    }).then(res=>{
+    },{headers:{
+    
+      'Authorization':'Token '+token
+    }}).then(res=>{
       this.componentDidMount();
       console.log(res)
     });
@@ -82,7 +100,10 @@ class Cas extends Component {
                     return <Col md={6}>
                     <Card
                       title={"Commentaire: " +casSignaler.commentaire}
-                      category={"Cas suspect numéro: " +casSignaler.id +", signaler le :" +casSignaler.date.toString() }
+                      category={"Cas suspect numéro: " +casSignaler.id +", Signaler le :" +casSignaler.date.toString()+", Par :"+this.state.user.map(user => {
+                        if (user.id==casSignaler.owner){
+                            return ( user.username)}
+                          })}
                       content={
                         <div>
                               <hr/>

@@ -11,6 +11,7 @@ import { FormInputs } from "components/FormInputs/FormInputs.jsx";
 import Button from "components/CustomButton/CustomButton.jsx";
 import  axios from "axios";
 import {apiConfig} from "../ApiConfig.js"
+const token=localStorage.getItem("base-token");
 class Compte extends Component {
    
 
@@ -42,15 +43,13 @@ class Compte extends Component {
  
  
   submit(id,email){
-    axios.put(apiConfig.mailUrl,{
+    console.log("jo")
+    axios.put(apiConfig.userUrl+`${id}/resetEmail/`,{
       "email":email,
-     
     }).then(res=>{
-      this.componentDidMount();
-     
+      
       console.log(res)
-    }) ;
-    
+    });
   }
 
   render() {
@@ -103,9 +102,9 @@ class Compte extends Component {
                                   
                                   ]}
                                 />
-                                 <input required type="titre" className="form-control" defaultValue={user.email}  onChange={e =>this.change(e)}    name ="email"  />
-
-                                <Button bsStyle="info" pullRight fill type="submit"  onClick={() => this.submit(localStorage.getItem('id'),this.state.email)}  >
+                                 <input required type="titre" placeholder="email "className="form-control" defaultValue={user.email}  onChange={e =>this.change(e)}    name ="email"  />
+                                           <br/>                       
+                                <Button bsStyle="info" pullRight fill type="submit"   onClick={() => this.submit(localStorage.getItem('id'),this.state.email)} >
                                   Sauvegarder
                                 </Button>
                                 <div className="clearfix" />

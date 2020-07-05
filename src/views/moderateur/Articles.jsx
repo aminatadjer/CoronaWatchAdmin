@@ -11,10 +11,13 @@ import ReactPlayer from 'react-player'
 
 
 var fileExtension = require('file-extension');
+const token=localStorage.getItem("base-token");
 class TableList extends Component {
   state ={
     articles:[],
+    user:[]
   };
+ 
   componentDidMount(){
 
     axios.get(apiConfig.articleUrl
@@ -25,6 +28,15 @@ class TableList extends Component {
       }
   
       );
+      axios.get(apiConfig.userUrl
+        ).then(res =>{
+            console.log(res);
+       
+            this.setState({user:res.data});
+          }
+      
+          );
+    
   }
 
   validateClick(id){
@@ -32,7 +44,10 @@ class TableList extends Component {
     axios.put(apiConfig.articleUrl+`${id}/ArticleValider/`,{
       "valide":1,
       "vu":1,
-    }).then(res=>{
+    },{headers:{
+    
+      'Authorization':'Token '+token
+    }}).then(res=>{
       this.componentDidMount();
       console.log(res)
     });
@@ -43,7 +58,10 @@ class TableList extends Component {
     axios.put(apiConfig.articleUrl+`${id}/ArticleSupprimer/`,{
       "supprime":1,
       "vu":1,
-    }).then(res=>{
+    },{headers:{
+      
+      'Authorization':'Token '+token
+    }}).then(res=>{
       this.componentDidMount();
       console.log(res)
     }); 
@@ -71,7 +89,7 @@ class TableList extends Component {
    {
     return (
       <ul> 
-        
+        <br/>
              <div className="content">
             <Grid fluid>
 
@@ -80,8 +98,11 @@ class TableList extends Component {
           if (articles.vu==0){
             return  <Col md={6}>
                   <Card
-                    title={"Num" +articles.id + ": "+ articles.titre}
-                    category={"Ecrit par hadjer "  }
+                    title={"Articles N° " +articles.id + ": "+ articles.titre}
+                   category={"Ecrit par hadjer "+this.state.user.map(user => {
+                    if (user.id==articles.owner){
+                        return ( user.username)}
+                      })   }
                    
                     content={
                     <form>

@@ -189,7 +189,7 @@ class Header extends Component {
             <a href="#pablo">{this.props.brandText}</a>
 
           </Navbar.Brand>
-          <button type="button" class="btn btn-dark ">
+          <button type="button" class="btn btn-dark " onClick={() => this.props.history.push('/moderateur/notifications')}>
          <a > <i className="fa fa-bell" />
          {console.log(this.state.countTotal)}
     <span class="badge badge-danger" >{this.state.countTotal}</span>
@@ -200,21 +200,11 @@ class Header extends Component {
         </Nav>
        
    
-          
-       
-    
-
-    
-    
-    
-  
-       
-    
       
           
         <Nav pullRight className="flex-row">
           
-          <NavItem eventKey={1} href="#">
+          <NavItem eventKey={1} onClick={() => this.props.history.push('/moderateur/user')}>
             Mon Compte
             
           </NavItem> 

@@ -39,9 +39,7 @@ class Notifications extends Component {
                   {this.state.article.reverse().map(article => {
                    if (article.valide==1){
                   return <Alert bsStyle="success">
-                    <button type="button" aria-hidden="true" className="close">
-                      &#x2715;
-                    </button>
+                  
                     <span>
                       <b> Success - </b>   le modérateur a validé votre article N°:{article.id}.
                     </span>
@@ -55,9 +53,7 @@ class Notifications extends Component {
                   {this.state.article.reverse().map(article => {
                    if (article.supprime==1){
                   return <Alert bsStyle="warning">
-                    <button type="button" aria-hidden="true" className="close">
-                      &#x2715;
-                    </button>
+                    
                     <span>
                       <b> Warning - </b>   le modérateur a supprimé votre article N°:{article.id}.
                     </span>

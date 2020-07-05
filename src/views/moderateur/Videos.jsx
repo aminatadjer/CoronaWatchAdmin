@@ -15,10 +15,12 @@ import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import {apiConfig} from "../ApiConfig.js";
 import  axios from "axios";
 import ReactPlayer from 'react-player'
+const token=localStorage.getItem("base-token");
 
 class Videos extends Component {
   state ={
     video:[],
+    user:[]
   
   };
   componentDidMount(){
@@ -28,13 +30,24 @@ class Videos extends Component {
         console.log(res);
         this.setState({video:res.data});
       }); 
+      axios.get(apiConfig.userUrl
+        ).then(res =>{
+            console.log(res);
+       
+            this.setState({user:res.data});
+          }
+      
+          );
   }
   validateClick(id){
     
     axios.put(apiConfig.videoUrl +`${id}/VideoValider/`,{
       "valide":1,
       "vu":1,
-    }).then(res=>{
+    },{headers:{
+    
+      'Authorization':'Token '+token
+    }}).then(res=>{
       this.componentDidMount();
       console.log(res);
     });
@@ -46,7 +59,10 @@ class Videos extends Component {
     axios.put(apiConfig.videoUrl+`${id}/VideoSupprimer/`,{
       "supprime":1,
       "vu":1,
-    }).then(res=>{
+    },{headers:{
+    
+      'Authorization':'Token '+token
+    }}).then(res=>{
       this.componentDidMount();
       console.log(res)
     });
@@ -64,14 +80,19 @@ class Videos extends Component {
                
                 content={
                   <form>
+                    <p> {"Cas signaler le: "+video.date+", Publié par: "+this.state.user.map(user => {
+                  if (user.id==video.owner){
+                      return ( user.username)}
+                    })    
+                  } </p>
                       <p>
-                        {video.description}
+                        {video.commentaire}
                       </p>
                   
                       <ReactPlayer
                       width='100%'
                       controls='true'
-                       url={video.video} />  
+                       url={video.media} />  
                        <br/>                    
                         <Button
                           onClick={() => this.validateClick(video.id)}

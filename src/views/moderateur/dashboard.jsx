@@ -106,14 +106,19 @@ class DashboardModerateur extends Component {
               count5=count5+1;
             })
 
-      this.setState({countTotal:this.state.countTotal+this.state.countSuspect+this.state.countGuerie+this.state.countMort+this.state.countConfirme+this.state.countCritique})
+      this.setState({countTotal:this.state.countSuspect+this.state.countGuerie+this.state.countMort+this.state.countConfirme+this.state.countCritique})
       console.log( this.state.countTotal)
+      console.log( this.state.countSuspect )
+      console.log( (this.state.countSuspect*100-(this.state.countSuspect*100) % this.state.countTotal) / this.state.countTotal)
+      console.log( this.state.countSuspect)
       console.log( this.state.countConfirme)
       console.log( this.state.countCritique)
-      console.log( this.state.critique)
-      console.log( this.state.guerie)
+      console.log( this.state.countGuerie)
+      console.log( this.state.countMort)
     ; 
   }
+
+ 
   numArticle(){
     this.state.articles.map(articles => {
       
@@ -167,7 +172,7 @@ class DashboardModerateur extends Component {
         const list = this.state.valRobot.push(Veille);
       }})
    
-      console.log("this.state.valRobot.length");  
+    
       this.setState({countVeille:this.state.countVeille+this.state.valRobot.length}); 
     //  this.setState({countVeille:+this.state.valGoogle.length});  
   }
@@ -229,21 +234,26 @@ class DashboardModerateur extends Component {
    
     
     var dataPie = {
-      labels: [(this.state.countSuspect*100) % this.state.countTotal+"% ",
-      (this.state.countGuerie*100)%this.state.countTotal+"% ", 
-       (this.state.countMort*100)%this.state.countTotal+"%", 
-       (this.state.countCritique*100)%this.state.countTotal+"% ", 
-(this.state.countConfirme*100) %this.state.countTotal+"% "],
-      series: [(this.state.countSuspect*100)%this.state.countTotal,
-       (this.state.countGuerie*100)%this.state.countTotal, 
-       (this.state.countMort*100)%this.state.countTotal,
-       (this.state.countCritique*100)%this.state.countTotal, 
-       (this.state.countConfirme*100)%this.state.countTotal]
+      labels: [(this.state.countSuspect*100-(this.state.countSuspect*100) % this.state.countTotal)/this.state.countTotal+"% ",
+      (this.state.countMort*100-(this.state.countMort*100) % this.state.countTotal)/this.state.countTotal+"% ", 
+      (this.state.countConfirme*100-(this.state.countConfirme*100) % this.state.countTotal)/this.state.countTotal+"% " , 
+
+      (this.state.countCritique*100-(this.state.countCritique*100) % this.state.countTotal)/this.state.countTotal+"% ", 
+    
+      (this.state.countGuerie*100-(this.state.countGuerie*100) % this.state.countTotal)/this.state.countTotal+"% "],
+      
+      series: [(this.state.countSuspect*100-(this.state.countSuspect*100) % this.state.countTotal)/this.state.countTotal,
+        (this.state.countMort*100-(this.state.countMort*100) % this.state.countTotal)/this.state.countTotal,
+        (this.state.countConfirme*100-(this.state.countConfirme*100) % this.state.countTotal)/this.state.countTotal,
+   
+ 
+        (this.state.countCritique*100-(this.state.countCritique*100) % this.state.countTotal)/this.state.countTotal, 
+        (this.state.countGuerie*100-(this.state.countGuerie*100) % this.state.countTotal)/this.state.countTotal ]
     };
     var dataBar = {
-      labels: ['suspect', 'confirme', 'critique', 'guerie', 'mort'],
+      labels: ['suspect', 'guerie', 'critique', 'confirme', 'mort'],
       series: [
-          [this.state.countSuspect, this.state.countConfirme, this.state.countCritique, this.state.countGuerie, this.state.countMort]
+          [this.state.countSuspect, this.state.countGuerie, this.state.countCritique,this.state.countConfirme , this.state.countMort]
       ]
   };
   var optionsBar = {
@@ -270,29 +280,29 @@ class DashboardModerateur extends Component {
             <Col md={4}>
               
               <StatsCard
-                bigIcon={<i className="pe-7s-news-paper text-info" />}
+                bigIcon={<a href='#'><i className="pe-7s-news-paper text-info"  onClick={() => this.props.history.push('/moderateur/Articles')}/></a>}
                 statsText="Article a traité"
                 statsValue={this.state.count}
                 statsIcon={<i className="fa fa-calendar-o" />}
-                statsIconText="Mise a jour maintenant"
+                statsIconText=" MAJ par les rédacteurs"
               />
             </Col>
             <Col md={4}>
               <StatsCard
-                bigIcon={<i className="pe-7s-note2 text-danger" />}
+                bigIcon={<a href='#'><i className="pe-7s-note2 text-danger" onClick={() => this.props.history.push('/moderateur/Cas')}/></a>}
                 statsText="Cas Signaler a traité"
                 statsValue={this.state.countCas}
                 statsIcon={<i className="fa fa-calendar-o" />}
-                statsIconText="Mise a jour maintenant"
+                statsIconText=" MAJ par les utilisateurs"
               />
             </Col>
             <Col md={4}>
               <StatsCard
-                bigIcon={<i className="pe-7s-map-marker text-danger" />}
+                bigIcon={<a href='#'><i  className="pe-7s-map-marker text-danger" onClick={() => this.props.history.push('/moderateur/evolution')}/></a>}
                 statsText="Zones a risque a traité"
                 statsValue={this.state.countZone}
                 statsIcon={<i className="fa fa-calendar-o" />}
-                statsIconText="Mise a jour maintenant"
+                statsIconText=" MAJ par les agents de santés "
               />
             </Col>
             
@@ -303,30 +313,30 @@ class DashboardModerateur extends Component {
           
           <Col md={4}>
               <StatsCard
-                bigIcon={<i className="pe-7s-video text-warning" />}
+                bigIcon={<a href='#'><i className="pe-7s-video text-warning" onClick={() => this.props.history.push('/moderateur/Vidéos')}/></a>}
                 statsText="Vidéos a traité"
                 statsValue={this.state.countVideo}
                 statsIcon={<i className="fa fa-calendar-o" />}
-                statsIconText="Mise a jour maintenant"
+                statsIconText=" MAJ par les utilisateurs"
               />
             </Col>
             <Col md={4}>
               <StatsCard
-                bigIcon={<i className="pe-7s-look text-info" />}
+                bigIcon={<a href='#'><i className="pe-7s-look text-info" onClick={() => this.props.history.push('/moderateur/veille')}/></a>}
                 statsText="Nouvelle Veille a traité"
               
                 statsValue={this.state.countVeille}
                 statsIcon={<i className="fa fa-calendar-o" />}
-                statsIconText="Mise a jour maintenant"
+                statsIconText="les dernières MAJ par robots"
               />
             </Col>
             <Col md={4}>
               <StatsCard
-                bigIcon={<i className="pe-7s-comment text-success" />}
+                bigIcon={<a href='#'><i className="pe-7s-comment text-success" onClick={() => this.props.history.push('/moderateur/Commentaire')}/></a>}
                 statsText="Commentaire a traité"
                 statsValue={this.state.countComment}
                 statsIcon={<i className="fa fa-calendar-o" />}
-                statsIconText="Mise a jour maintenant"
+                statsIconText="les dernières MAJ par les utilisateurs"
               />
             </Col>
             </Row>
@@ -338,8 +348,8 @@ class DashboardModerateur extends Component {
                 statsIcon="fa fa-history"
                 id="chartHours"
                 title="Evolution des cas en Algerie"
-                category="24 Hours performance"
-                stats="Mise a jour maintenant"
+               
+                stats="les dernières MAJ"
                 content={
                   <div className="ct-chart">
                       <ChartistGraph
@@ -363,12 +373,12 @@ class DashboardModerateur extends Component {
                 category={<Row >
                        <Col md={4}>  <li class="d-flex col-6"><i className="fa fa-circle" style={{ color:'green'}} /> <p>gurie</p></li> </Col>
                   <Col md={4}> <li class="d-flex col-6"><i className="fa fa-circle" style={{ color:'purple'}} /> <p>critique</p></li> </Col>
-                  <Col md={4}>  <li class="d-flex col-6"><i className="fa fa-circle" style={{ color:'blue'}} /> <p>confirme</p></li></Col>
+                  <Col md={4}>  <li class="d-flex col-6"><i className="fa fa-circle" style={{ color:'blue'}} /> <p>suspect</p></li></Col>
                   <Col md={4}>  <li class="d-flex col-6"><i className="fa fa-circle" style={{ color:'red '}} /> <p>mort</p></li></Col>
-                  <Col md={4}><li class="d-flex col-6"><i className="fa fa-circle" style={{ color:'orange'}} /> <p>suspect</p></li></Col>
+                  <Col md={4}><li class="d-flex col-6"><i className="fa fa-circle" style={{ color:'orange'}} /> <p>confirme</p></li></Col>
                 
                 </Row>}
-                stats="Mise a jour maintenent"
+                stats="les dernières MAJ"
                 content={
                  
               
