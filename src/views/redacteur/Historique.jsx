@@ -75,15 +75,20 @@ class TableList extends Component {
                       </thead>
                       <tbody>
                         
-                      {this.state.articles.map(article => {
+                      {this.state.articles.reverse().map(article => {
                         
-                        if (article.supprime==1 ){
+                        if (article.supprime==1 || article.vu==0 ){
                           return (
                             <tr >
 
                               <td>{article.id}</td>
                             <td>{article.titre}</td>
-                            <td>{article.contenu}</td>
+                            <td> <p
+                           align ="center" style={{ fontSize:'25px'}}                           
+                           dangerouslySetInnerHTML={{
+                              __html:article.contenu
+                            }}>
+                        </p></td>
                             <td>{article.media}</td>
                            
                             <td><i class="fa fa-close  fa-2x" aria-hidden="true" style={{ color :'red ' }}></i></td>
@@ -92,7 +97,7 @@ class TableList extends Component {
                           );}
                         })}
                              
-                      {this.state.articles.map(article => {
+                      {this.state.articles.reverse().map(article => {
                         
                         if (article.valide==1 ){
                           return (
