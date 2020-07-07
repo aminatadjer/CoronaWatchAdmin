@@ -95,7 +95,7 @@ class Videos extends Component {
                        url={video.media} />  
                        <br/>                    
                         <Button
-                          onClick={() => this.validateClick(video.id)}
+                          onClick={() => this.deleteClick(video.id)}
                           variant="contained"
                           color="secondary"
                           style={{ background:'#FF4A55', color: 'black' ,position:'relative',float:'center',width:'180PX',fontSize:'15px'}}
@@ -104,7 +104,7 @@ class Videos extends Component {
                        </Button>
                        
                        <Button
-                          onClick={() => this.deleteClick(video.id)}
+                          onClick={() => this.validateClick(video.id)}
                           style={{ background:'#87CB16', color: 'black' ,position:'relative', float:'left',width:'180PX',fontSize:'15px'}}
                           variant="contained"
                           color="Green"

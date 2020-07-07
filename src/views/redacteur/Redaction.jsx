@@ -65,7 +65,7 @@ class Redaction extends Component {
     form_data.append('contenu', this.state.contenu);
     form_data.append('titre', this.state.titre);
     this.cancelCourse();
-    axios.post(apiConfig.articleUrl, form_data)
+    axios.post(apiConfig.articleAddUrl, form_data)
         .then(res => {
           console.log(res.data);
           this.componentDidMount();
